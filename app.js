@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
           resp.textContent = `Tech Stack: Unity 6 XR, Meta Quest 3, Protégé / OWL 2, WebSockets, JavaScript/TypeScript, Python, HTML/CSS Retrô.`;
           break;
         case 'contact':
-          resp.textContent = `E-mail: lana@cin.ufpe.br | GitHub: github.com/lana | LinkedIn: linkedin.com/in/lana`;
+          resp.textContent = `E-mail: lsasa@cin.ufpe.br | GitHub: github.com/lanalcantara | Lattes: buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K8052185D8`;
           break;
         case 'clear':
           terminalLogs.innerHTML = `<p class="term-line text-cyan">&gt; Terminal limpo. Digite 'help' para comandos.</p>`;
@@ -325,6 +325,76 @@ document.addEventListener('DOMContentLoaded', () => {
       konamiIndex = 0;
     }
   });
+
+  // 11. FILTRO DA GALERIA DE FOTOS & MODAL LIGHTBOX
+  const galleryFilters = document.querySelectorAll('.gallery-filter-btn');
+  const galleryCards = document.querySelectorAll('.gallery-card.polaroid');
+  const photoModal = document.getElementById('photoModal');
+  const btnClosePhotoModal = document.getElementById('btnClosePhotoModal');
+  const photoModalFrame = document.getElementById('photoModalFrame');
+  const photoModalCaptionTitle = document.getElementById('photoModalCaptionTitle');
+  const photoModalCaptionDesc = document.getElementById('photoModalCaptionDesc');
+  const photoModalTag = document.getElementById('photoModalTag');
+
+  // Filtros de Categoria
+  galleryFilters.forEach(btn => {
+    btn.addEventListener('click', function () {
+      galleryFilters.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.getAttribute('data-filter');
+
+      galleryCards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (window.RetroAudio) window.RetroAudio.playJump();
+    });
+  });
+
+  // Clique no Card para Abrir Modal
+  galleryCards.forEach(card => {
+    card.addEventListener('click', function () {
+      if (!photoModal) return;
+      const title = this.getAttribute('data-title') || this.querySelector('.caption-title').textContent;
+      const desc = this.getAttribute('data-desc') || this.querySelector('.caption-desc').textContent;
+      const tag = this.getAttribute('data-tag') || 'Registro';
+      const imgWrap = this.querySelector('.polaroid-img-wrap');
+
+      if (photoModalCaptionTitle) photoModalCaptionTitle.textContent = title;
+      if (photoModalCaptionDesc) photoModalCaptionDesc.textContent = desc;
+      if (photoModalTag) photoModalTag.textContent = tag;
+      if (photoModalFrame && imgWrap) {
+        photoModalFrame.innerHTML = imgWrap.innerHTML;
+      }
+
+      photoModal.classList.remove('hidden');
+      if (window.RetroAudio) window.RetroAudio.playScore();
+    });
+  });
+
+  // Fechar Modal de Fotos
+  if (btnClosePhotoModal && photoModal) {
+    btnClosePhotoModal.addEventListener('click', () => {
+      photoModal.classList.add('hidden');
+    });
+
+    photoModal.addEventListener('click', (e) => {
+      if (e.target === photoModal) {
+        photoModal.classList.add('hidden');
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !photoModal.classList.contains('hidden')) {
+        photoModal.classList.add('hidden');
+      }
+    });
+  }
 
 });
 

@@ -44,13 +44,14 @@
       <div class="nav-brand">
         <span class="brand-icon">👾</span>
         <span class="brand-title">LANA.EXE</span>
-        <span class="brand-tag">v2.4 [SENAC &bull; CIn-UFPE]</span>
+        <span class="brand-tag">v2.4 [Mestranda CIn UFPE]</span>
       </div>
 
       <div class="nav-links">
         <a href="#arcade-section" class="nav-btn"><span class="btn-prefix">&gt;</span> MINIJOGO</a>
         <a href="#about-section" class="nav-btn"><span class="btn-prefix">&gt;</span> SOBRE MIM</a>
         <a href="#projects-section" class="nav-btn highlight-link"><span class="btn-prefix">&gt;</span> PAC-MAN SEMÂNTICO</a>
+        <a href="#gallery-section" class="nav-btn"><span class="btn-prefix">&gt;</span> GALERIA</a>
         <a href="#checkpoints-section" class="nav-btn"><span class="btn-prefix">&gt;</span> CHECKPOINTS</a>
         <a href="#blog-section" class="nav-btn"><span class="btn-prefix">&gt;</span> DIÁRIO TUMBLR</a>
         <a href="#contact-section" class="nav-btn"><span class="btn-prefix">&gt;</span> CONTATO</a>
@@ -187,19 +188,40 @@
           </div>
           <div class="profile-card-content">
             <div class="avatar-frame">
-              <!-- Pixel Art Avatar com animação de moldura -->
-              <div class="pixel-avatar-art">
-                <div class="avatar-pixel-face">
-                  <div class="avatar-hair"></div>
-                  <div class="avatar-eyes">
-                    <span class="eye left"></span>
-                    <span class="eye right"></span>
+              <!-- Pixel Art Avatar Customizado (Mulher, cabelo curto cacheado castanho claro, olhos verdes, pele marrom bege) -->
+              <div class="pixel-avatar-art lana-curly-avatar" title="Avatar Pixel Art de Lana">
+                <!-- Cabelo Curto Cacheado Topo e Laterais -->
+                <div class="hair-curls-crown"></div>
+                <div class="hair-curls-side left"></div>
+                <div class="hair-curls-side right"></div>
+                
+                <div class="avatar-pixel-face-clean">
+                  <!-- Franja Encaracolada Castanho Claro -->
+                  <div class="avatar-curly-bangs"></div>
+
+                  <!-- Olhos Verdes Esmeralda com Brilho -->
+                  <div class="avatar-eyes-container">
+                    <span class="pixel-eye emerald left">
+                      <span class="pupil"></span>
+                      <span class="sparkle"></span>
+                    </span>
+                    <span class="pixel-eye emerald right">
+                      <span class="pupil"></span>
+                      <span class="sparkle"></span>
+                    </span>
                   </div>
-                  <div class="avatar-smile"></div>
-                  <div class="avatar-blush"></div>
+
+                  <!-- Bochechas Coradas Discretas -->
+                  <div class="avatar-blush-duo">
+                    <span class="blush-pill left"></span>
+                    <span class="blush-pill right"></span>
+                  </div>
+
+                  <!-- Sorriso Pixel Art -->
+                  <div class="avatar-gentle-smile"></div>
                 </div>
               </div>
-              <div class="avatar-badge">LVL 24</div>
+              <div class="avatar-badge" title="Status Acadêmico: Mestranda no CIn-UFPE">MESTRANDA</div>
             </div>
 
             <h2 class="player-name">LANA</h2>
@@ -507,6 +529,144 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3.5. GALERIA VISUAL // SNAPSHOTS & FOTOS   -->
+    <!-- ========================================== -->
+    <section id="gallery-section" class="section-container">
+      <div class="section-title-tag">
+        <span class="tag-hash">📷</span> REGISTROS_VISUAIS // SNAPSHOTS_E_PROJETOS
+      </div>
+
+      <div class="retro-window gallery-window">
+        <div class="window-titlebar mint-bar">
+          <div class="window-title-group">
+            <span class="title-square"></span>
+            <span class="title-text">PHOTO_ALBUM_V1.0.DIR // REGISTROS_E_VIDA_CIENTIFICA</span>
+          </div>
+          <div class="gallery-filters" id="galleryFilters">
+            <button class="gallery-filter-btn active" data-filter="all">★ TODOS</button>
+            <button class="gallery-filter-btn" data-filter="vr">🥽 VR & PROJETOS</button>
+            <button class="gallery-filter-btn" data-filter="research">🔬 PESQUISA & BANCADA</button>
+            <button class="gallery-filter-btn" data-filter="tech">💻 TECH & CIn-UFPE</button>
+          </div>
+        </div>
+
+        <div class="gallery-body">
+          <p class="gallery-intro-text">
+            Um compilado visual dos bastidores da minha pesquisa, protótipos em Realidade Virtual no Meta Quest 3, modelagem de ontologias no Protégé e memórias da bancada científica! Clique em qualquer foto para ver em detalhe.
+          </p>
+
+          <div class="gallery-grid" id="galleryGrid">
+            
+            <!-- Foto 1: Pac-Man Semântico VR -->
+            <div class="gallery-card polaroid" data-category="vr" data-title="Pac-Man Semântico em VR" data-desc="Navegação em primeira pessoa pela TBox de ontologias no Meta Quest 3 via Unity 6. Placas viárias indicam relações taxonômicas e restrições em tempo real." data-tag="CIn-UFPE • Unity 6 XR">
+              <div class="polaroid-img-wrap">
+                <div class="retro-img-placeholder vr-bg">
+                  <span class="placeholder-emoji">🥽</span>
+                  <span class="placeholder-badge">META QUEST 3</span>
+                  <div class="placeholder-grid-lines"></div>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <span class="caption-title">Pac-Man Semântico em VR</span>
+                <span class="caption-desc">Exploração imersiva da TBox no Meta Quest 3</span>
+                <span class="caption-meta">CIn-UFPE &bull; Unity 6</span>
+              </div>
+            </div>
+
+            <!-- Foto 2: Protégé & Grafo de Ontologias -->
+            <div class="gallery-card polaroid" data-category="vr" data-title="Grafo de Ontologias & Axiomas OWL" data-desc="Modelagem conceitual no Protégé 5.6 com raciocinador HermiT e serialização para transmissão contínua via WebSocket." data-tag="OWL 2 DL • HermiT">
+              <div class="polaroid-img-wrap">
+                <div class="retro-img-placeholder protege-bg">
+                  <span class="placeholder-emoji">🦉</span>
+                  <span class="placeholder-badge">PROTÉGÉ 5.6</span>
+                  <div class="placeholder-grid-lines"></div>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <span class="caption-title">Grafo de Ontologias</span>
+                <span class="caption-desc">Hierarquia formal e teste de coerência lógica</span>
+                <span class="caption-meta">Web Semântica</span>
+              </div>
+            </div>
+
+            <!-- Foto 3: Pesquisa na Fiocruz-PE -->
+            <div class="gallery-card polaroid" data-category="research" data-title="Bancada Científica na Fiocruz-PE" data-desc="Vivência prática em pesquisa de bancada, imunologia e parasitologia durante o PIBIC e TCC no Instituto Aggeu Magalhães (Fiocruz-PE)." data-tag="Fiocruz-PE • Parasitologia">
+              <div class="polaroid-img-wrap">
+                <div class="retro-img-placeholder fiocruz-bg">
+                  <span class="placeholder-emoji">🔬</span>
+                  <span class="placeholder-badge">FIOCRUZ-PE</span>
+                  <div class="placeholder-grid-lines"></div>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <span class="caption-title">Bancada & Parasitologia</span>
+                <span class="caption-desc">PIBIC e TCC desenvolvidos no IAM / Fiocruz-PE</span>
+                <span class="caption-meta">Fiocruz-PE &bull; UFRPE</span>
+              </div>
+            </div>
+
+            <!-- Foto 4: Primatas & Comportamento Animal -->
+            <div class="gallery-card polaroid" data-category="research" data-title="Biologia, Histologia & Primatologia" data-desc="Trabalho de campo e laboratório na UFRPE estudando comportamento de primatas, anatomia comparada e sistemática filogenética." data-tag="UFRPE • Ciências Biológicas">
+              <div class="polaroid-img-wrap">
+                <div class="retro-img-placeholder bio-bg">
+                  <span class="placeholder-emoji">🐒</span>
+                  <span class="placeholder-badge">UFRPE BIOLOGIA</span>
+                  <div class="placeholder-grid-lines"></div>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <span class="caption-title">Primatologia & Sistemática</span>
+                <span class="caption-desc">Histologia, anatomia e etologia na UFRPE</span>
+                <span class="caption-meta">Base Científica</span>
+              </div>
+            </div>
+
+            <!-- Foto 5: Faculdade SENAC PE -->
+            <div class="gallery-card polaroid" data-category="tech" data-title="Graduação em Sistemas de Informação" data-desc="Formação prática em engenharia de requisitos, bancos de dados, arquiteturas distribuídas e desenvolvimento front-end com foco em UX." data-tag="SENAC-PE • Sistemas de Info">
+              <div class="polaroid-img-wrap">
+                <div class="retro-img-placeholder senac-bg">
+                  <span class="placeholder-emoji">💻</span>
+                  <span class="placeholder-badge">SENAC-PE</span>
+                  <div class="placeholder-grid-lines"></div>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <span class="caption-title">Sistemas de Informação</span>
+                <span class="caption-desc">Desenvolvimento de software e transição tech</span>
+                <span class="caption-meta">Faculdade SENAC</span>
+              </div>
+            </div>
+
+            <!-- Foto 6: Centro de Informática CIn-UFPE -->
+            <div class="gallery-card polaroid" data-category="tech" data-title="Mestrado em Ciência da Computação" data-desc="Pesquisa de ponta no Centro de Informática da UFPE integrando Inteligência Computacional, Realidade Virtual e Engenharia de Conhecimento." data-tag="CIn-UFPE • Pós-Graduação">
+              <div class="polaroid-img-wrap">
+                <div class="retro-img-placeholder cin-bg">
+                  <span class="placeholder-emoji">🎓</span>
+                  <span class="placeholder-badge">CIn-UFPE</span>
+                  <div class="placeholder-grid-lines"></div>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <span class="caption-title">Mestrado CIn-UFPE</span>
+                <span class="caption-desc">Inteligência Computacional & Realidade Estendida</span>
+                <span class="caption-meta">Pós-Graduação</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Banner Informativo Polaroid -->
+          <div class="gallery-tip-box">
+            <span class="tip-icon">💾</span>
+            <span class="tip-text">
+              <strong>Como colocar suas fotos reais:</strong> Crie uma pasta <code>images/</code> no projeto e basta colocar <code>&lt;img src="images/minha-foto.jpg" alt="..."&gt;</code> substituindo o bloco placeholder!
+            </span>
+          </div>
         </div>
       </div>
     </section>
@@ -880,6 +1040,31 @@
           <button id="btnResolveOntology" class="retro-pixel-btn primary">
             ✨ Restaurar Consistência Axiomática
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL DE VISUALIZAÇÃO DE FOTO / POLAROID   -->
+  <!-- ========================================== -->
+  <div id="photoModal" class="retro-modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="retro-window photo-modal-window">
+      <div class="window-titlebar mint-bar">
+        <span class="title-text" id="photoModalTitle">SNAPSHOT_VIEWER // FOTO.PNG</span>
+        <button id="btnClosePhotoModal" class="win-btn win-close">✕</button>
+      </div>
+      <div class="photo-modal-body">
+        <div class="photo-modal-frame" id="photoModalFrame">
+          <!-- Conteúdo dinâmico da foto inserido pelo app.js -->
+        </div>
+        <div class="photo-modal-info">
+          <h3 id="photoModalCaptionTitle" class="photo-caption-title">Título do Registro</h3>
+          <p id="photoModalCaptionDesc" class="photo-caption-desc">Descrição detalhada do momento ou experimento.</p>
+          <div class="photo-modal-meta">
+            <span id="photoModalTag" class="photo-badge">CIn-UFPE</span>
+            <span class="photo-hint">Pressione ESC para fechar</span>
+          </div>
         </div>
       </div>
     </div>

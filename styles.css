@@ -742,30 +742,83 @@ body.crt-enabled .crt-overlay {
   justify-content: center;
 }
 
-/* Pixel Avatar Feito em CSS Puro */
-.pixel-avatar-art {
+/* Pixel Avatar Customizado (Mulher, Cabelo Curto Cacheado Castanho Claro, Olhos Verdes, Pele Marrom Bege) */
+.pixel-avatar-art.lana-curly-avatar {
   position: relative;
-  width: 80px;
-  height: 80px;
-  background: #ffd3b6;
-  border: 3px solid #000;
-  box-shadow: inset -4px -4px 0px #e09f7a;
+  width: 84px;
+  height: 84px;
+  background: #bf8656; /* Pele marrom bege quente */
+  border: 3px solid #0f051d;
+  box-shadow: inset -4px -4px 0px #a46f43;
 }
 
-.avatar-hair {
+/* Cachos no topo da cabeça (Crown curls) */
+.hair-curls-crown {
   position: absolute;
-  top: -8px;
-  left: -4px;
-  width: 88px;
-  height: 28px;
-  background: #4a2800;
-  border: 3px solid #000;
-  box-shadow: 0 4px 0px #704008;
+  top: -10px;
+  left: -6px;
+  width: 96px;
+  height: 26px;
+  background: #965b3c; /* Castanho claro */
+  border: 3px solid #0f051d;
+  box-shadow: 
+    inset 0 4px 0 #b37450,
+    inset -4px -2px 0 #7e4629;
+  border-radius: 8px 8px 2px 2px;
 }
 
-.avatar-eyes {
+/* Cachos laterais curtos e ondulados */
+.hair-curls-side.left {
   position: absolute;
-  top: 32px;
+  top: 12px;
+  left: -8px;
+  width: 14px;
+  height: 38px;
+  background: #965b3c;
+  border: 3px solid #0f051d;
+  border-radius: 6px 0 6px 6px;
+  box-shadow: inset 2px 2px 0 #b37450;
+  z-index: 2;
+}
+
+.hair-curls-side.right {
+  position: absolute;
+  top: 12px;
+  right: -8px;
+  width: 14px;
+  height: 38px;
+  background: #965b3c;
+  border: 3px solid #0f051d;
+  border-radius: 0 6px 6px 6px;
+  box-shadow: inset -2px 2px 0 #b37450;
+  z-index: 2;
+}
+
+.avatar-pixel-face-clean {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Franja encaracolada suave */
+.avatar-curly-bangs {
+  position: absolute;
+  top: 12px;
+  left: 6px;
+  width: 66px;
+  height: 14px;
+  background: #965b3c;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 
+    inset 0 -2px 0 #7e4629,
+    4px 0 0 #b37450;
+}
+
+/* Olhos Verdes Esmeralda com Brilho */
+.avatar-eyes-container {
+  position: absolute;
+  top: 34px;
   left: 0;
   width: 100%;
   display: flex;
@@ -773,31 +826,59 @@ body.crt-enabled .crt-overlay {
   padding: 0 16px;
 }
 
-.eye {
-  display: inline-block;
-  width: 8px;
+.pixel-eye.emerald {
+  position: relative;
+  width: 9px;
   height: 12px;
-  background: #120624;
+  background: #0f051d;
   border-radius: 1px;
 }
 
-.avatar-blush {
+.pixel-eye.emerald .pupil {
   position: absolute;
-  top: 44px;
-  left: 8px;
-  width: 64px;
-  height: 6px;
-  background: transparent;
-  box-shadow: 4px 0 0 #ff7597, 52px 0 0 #ff7597;
+  top: 2px;
+  left: 1px;
+  width: 6px;
+  height: 8px;
+  background: #27ae60; /* Verde esmeralda vivo */
+  border-radius: 1px;
 }
 
-.avatar-smile {
+.pixel-eye.emerald .sparkle {
   position: absolute;
-  top: 50px;
-  left: 32px;
-  width: 16px;
-  height: 6px;
-  border-bottom: 3px solid #000;
+  top: 2px;
+  left: 2px;
+  width: 2px;
+  height: 2px;
+  background: #ffffff; /* Brilho nos olhos */
+}
+
+/* Bochechas Coradas Sutis (sem vazamento lateral) */
+.avatar-blush-duo {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+.blush-pill {
+  width: 8px;
+  height: 4px;
+  background: #d97d72; /* Tom rosado natural para pele marrom bege */
+  opacity: 0.85;
+}
+
+/* Sorriso Suave */
+.avatar-gentle-smile {
+  position: absolute;
+  top: 54px;
+  left: 33px;
+  width: 14px;
+  height: 5px;
+  border-bottom: 2px solid #0f051d;
   border-radius: 0 0 8px 8px;
 }
 
@@ -812,6 +893,7 @@ body.crt-enabled .crt-overlay {
   padding: 4px 8px;
   border: 2px solid var(--border-dark);
   box-shadow: 2px 2px 0px #000;
+  z-index: 5;
 }
 
 .player-name {
@@ -2223,6 +2305,258 @@ body.crt-enabled .crt-overlay {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   21. SEÇÃO DE GALERIA DE FOTOS & REGISTROS (SNAPSHOTS POLAROID)
+   -------------------------------------------------------------------------- */
+.gallery-window {
+  background: var(--bg-card-purple);
+  border: 3px solid var(--border-dark);
+}
+
+.gallery-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.gallery-filter-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  background: var(--bg-deep-space);
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+  padding: 4px 8px;
+  box-shadow: 1px 1px 0px #000;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.gallery-filter-btn:hover {
+  background: var(--neon-pink);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.gallery-filter-btn.active {
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+  border-color: #000;
+  box-shadow: 2px 2px 0px #000;
+}
+
+.gallery-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gallery-intro-text {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  background: #190930;
+  border: 2px dashed #4b1f7d;
+  padding: 12px 16px;
+  line-height: 1.6;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Card Polaroid Retrô */
+.gallery-card.polaroid {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard);
+  padding: 14px 14px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.gallery-card.polaroid:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 8px 8px 0px var(--neon-pink);
+}
+
+.gallery-card.polaroid:nth-child(even):hover {
+  transform: translateY(-6px) rotate(1deg);
+  box-shadow: 8px 8px 0px var(--bg-mint-darker);
+}
+
+.gallery-card.polaroid.hidden {
+  display: none !important;
+}
+
+/* Quadro da Imagem Polaroid */
+.polaroid-img-wrap {
+  width: 100%;
+  height: 190px;
+  background: #090312;
+  border: 2px solid var(--border-dark);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retro-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+}
+
+.placeholder-emoji {
+  font-size: 2.8rem;
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.placeholder-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.58rem;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--neon-yellow);
+  padding: 3px 8px;
+  border: 1px solid #000;
+  z-index: 2;
+}
+
+.placeholder-grid-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 16px 16px;
+  z-index: 1;
+}
+
+/* Variações de fundo temáticas */
+.vr-bg { background: linear-gradient(135deg, #1e083a, #4a154b); }
+.protege-bg { background: linear-gradient(135deg, #0b2239, #134074); }
+.fiocruz-bg { background: linear-gradient(135deg, #0f382c, #1b634c); }
+.bio-bg { background: linear-gradient(135deg, #2b3a0f, #516d1f); }
+.senac-bg { background: linear-gradient(135deg, #3a220f, #7a461b); }
+.cin-bg { background: linear-gradient(135deg, #2d0e38, #5a144e); }
+
+/* Legenda Polaroid */
+.polaroid-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.caption-title {
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  color: var(--text-dark);
+}
+
+.caption-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted-dark);
+  line-height: 1.4;
+}
+
+.caption-meta {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--neon-pink);
+  margin-top: 4px;
+}
+
+.gallery-tip-box {
+  background: var(--bg-deep-space);
+  border: 2px solid var(--border-dark);
+  padding: 12px 16px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gallery-tip-box strong {
+  color: var(--neon-yellow);
+}
+
+/* Modal de Visualização da Foto (Lightbox) */
+.photo-modal-window {
+  width: 100%;
+  max-width: 620px;
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+}
+
+.photo-modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.photo-modal-frame {
+  width: 100%;
+  height: 280px;
+  background: #090312;
+  border: 3px solid var(--border-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo-caption-title {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.photo-caption-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted-dark);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.photo-modal-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.photo-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  background: var(--neon-pink);
+  color: #fff;
+  padding: 3px 8px;
+  border: 1px solid #000;
+}
+
+.photo-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted-dark);
 }
 
 /* --------------------------------------------------------------------------
