@@ -1,0 +1,2298 @@
+/* ==========================================================================
+   PORTFÓLIO RETRO ARCADE & WEB SEMÂNTICA - ESTILOS PRINCIPAIS
+   Estética: Nostalgia Tumblr, Pixel Art Arcade, Neo-brutalismo & Tons Neon
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIÁVEIS DO SISTEMA DE DESIGN & PALETA DE CORES
+   -------------------------------------------------------------------------- */
+:root {
+  /* Tons Principais (Roxo Profundo, Rosa Neon, Verde Menta & Bege Retrô) */
+  --bg-deep-space: #140727;
+  --bg-arcade-purple: #230d43;
+  --bg-card-purple: #34155e;
+  --bg-retro-cream: #faf3e0;
+  --bg-retro-beige-dark: #f0e3c4;
+  --bg-mint-soft: #a8e6cf;
+  --bg-mint-darker: #79d7a8;
+
+  --neon-pink: #ff3c89;
+  --neon-pink-hover: #ff65a3;
+  --neon-purple: #9b5de5;
+  --neon-cyan: #00f0ff;
+  --neon-yellow: #ffd166;
+  --neon-green: #06d6a0;
+  
+  --border-dark: #0f051d;
+  --text-dark: #120624;
+  --text-light: #fef8eb;
+  --text-muted: #bda8d9;
+  --text-muted-dark: #5e526c;
+
+  /* Efeitos de Sombra Neo-Brutalist Hard Edge */
+  --shadow-hard: 5px 5px 0px #0f051d;
+  --shadow-hard-sm: 3px 3px 0px #0f051d;
+  --shadow-hard-pink: 5px 5px 0px var(--neon-pink);
+  --shadow-hard-mint: 5px 5px 0px var(--bg-mint-darker);
+  --shadow-hard-yellow: 5px 5px 0px var(--neon-yellow);
+
+  /* Tipografia */
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-mono: 'Space Mono', monospace;
+  --font-terminal: 'VT323', monospace;
+
+  /* Transições */
+  --transition-fast: 0.15s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & REGRAS GERAIS
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-deep-space);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(155, 93, 229, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 60, 137, 0.12) 0%, transparent 45%),
+    linear-gradient(rgba(20, 7, 39, 0.95), rgba(20, 7, 39, 0.98)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 24px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 24px
+    );
+  color: var(--text-light);
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Cursor Customizado Retrô em Links e Botões */
+a, button, [role="button"] {
+  cursor: pointer;
+}
+
+/* Scrollbar Estilizada Pixel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep-space);
+  border-left: 2px solid var(--border-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-pink);
+  border: 2px solid var(--border-dark);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-yellow);
+}
+
+/* --------------------------------------------------------------------------
+   3. OVERLAY CRT (SCANLINES & CURVATURA DE TUBO)
+   -------------------------------------------------------------------------- */
+.crt-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99999;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 6px 100%;
+  opacity: 0.75;
+}
+
+body.crt-enabled .crt-overlay {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   4. NAVEGAÇÃO SUPERIOR (RETRO NEO-BRUTALIST NAVBAR)
+   -------------------------------------------------------------------------- */
+.top-nav-container {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 12px 20px;
+  background: rgba(20, 7, 39, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 3px solid var(--border-dark);
+}
+
+.retro-navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  padding: 6px 12px;
+  border: 2px solid var(--border-dark);
+  box-shadow: var(--shadow-hard-sm);
+}
+
+.brand-icon {
+  font-size: 1.1rem;
+}
+
+.brand-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background: var(--bg-arcade-purple);
+  color: var(--neon-yellow);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  text-decoration: none;
+  color: var(--text-light);
+  background: var(--bg-arcade-purple);
+  padding: 8px 12px;
+  border: 2px solid var(--border-dark);
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-btn:hover {
+  transform: translate(-2px, -2px);
+  background: var(--neon-pink);
+  color: #fff;
+  box-shadow: 4px 4px 0px #000;
+}
+
+.nav-btn.highlight-link {
+  background: var(--bg-mint-soft);
+  color: var(--text-dark);
+  border-color: var(--border-dark);
+}
+
+.nav-btn.highlight-link:hover {
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+}
+
+.btn-prefix {
+  color: var(--neon-yellow);
+  margin-right: 4px;
+}
+
+.nav-toggles {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-pill {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  background: var(--bg-card-purple);
+  color: var(--text-light);
+  border: 2px solid var(--border-dark);
+  padding: 6px 10px;
+  box-shadow: 2px 2px 0px #000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.toggle-pill:hover {
+  background: var(--neon-purple);
+}
+
+.toggle-pill.active {
+  background: var(--bg-mint-soft);
+  color: var(--text-dark);
+  border-color: #000;
+}
+
+/* --------------------------------------------------------------------------
+   5. CONTAINER PRINCIPAL & JANELAS RETRÔ
+   -------------------------------------------------------------------------- */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 80px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* Estilo Base de Janela Retrô (OS / Arcade Cabinet) */
+.retro-window {
+  background: var(--bg-card-purple);
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Barra de Título das Janelas */
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: var(--bg-deep-space);
+  color: var(--text-light);
+  border-bottom: 3px solid var(--border-dark);
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+}
+
+.window-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--neon-pink);
+  border: 1px solid #000;
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.win-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  border: 2px solid var(--border-dark);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1;
+  box-shadow: 1px 1px 0px #000;
+  cursor: pointer;
+}
+
+.win-btn.win-close {
+  background: #ff5e57;
+  color: #fff;
+}
+
+/* Cores de Barra de Título Variadas */
+.window-titlebar.mint-bar {
+  background: var(--bg-mint-soft);
+  color: var(--text-dark);
+}
+
+.window-titlebar.cream-bar {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+}
+
+.window-titlebar.flagship-bar {
+  background: linear-gradient(90deg, #ff3c89, #9b5de5);
+  color: #fff;
+}
+
+/* Tags de Seção */
+.section-title-tag {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  background: var(--neon-pink);
+  color: #fff;
+  padding: 8px 16px;
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard-sm);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.section-title-tag.flagship-tag {
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+}
+
+.tag-hash {
+  color: var(--text-dark);
+  font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------
+   6. SEÇÃO 1: CABEÇALHO / MINIJOGO ARCADE (PAC-RUNNER)
+   -------------------------------------------------------------------------- */
+.arcade-card-wrapper {
+  margin-top: 10px;
+}
+
+.arcade-window {
+  background: #250f44;
+}
+
+.arcade-header-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #1c0a35;
+  border-bottom: 3px solid var(--border-dark);
+}
+
+.arcade-marquee {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.arcade-title {
+  font-family: var(--font-pixel);
+  font-size: 1.3rem;
+  color: var(--neon-yellow);
+  text-shadow: 3px 3px 0px #000;
+  letter-spacing: 1px;
+}
+
+.blinking-star {
+  font-size: 1.3rem;
+  color: var(--neon-pink);
+  animation: blinkAnim 1s infinite alternate;
+}
+
+@keyframes blinkAnim {
+  0% { opacity: 0.2; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.1); }
+}
+
+.arcade-hud-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-box {
+  background: var(--bg-deep-space);
+  border: 2px solid var(--border-dark);
+  padding: 6px 12px;
+  box-shadow: 2px 2px 0px #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hud-box.highlight {
+  border-color: var(--neon-pink);
+}
+
+.hud-label {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--text-muted);
+}
+
+.hud-value {
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  color: var(--neon-green);
+  text-shadow: 1px 1px 0px #000;
+}
+
+.hud-box.highlight .hud-value {
+  color: var(--neon-yellow);
+}
+
+/* Viewport do Canvas do Jogo */
+.canvas-viewport {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: #17092c;
+  overflow: hidden;
+  border-bottom: 3px solid var(--border-dark);
+}
+
+#pacGameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: pointer;
+}
+
+/* Overlays Sobre o Canvas (Start & Game Over) */
+.canvas-ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 6, 34, 0.78);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  padding: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.canvas-ui-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+/* Balão Retrô Start Game */
+.arcade-speech-bubble {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard);
+  padding: 18px 24px;
+  text-align: center;
+  max-width: 520px;
+  position: relative;
+}
+
+.arcade-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 12px 10px 0;
+  border-style: solid;
+  border-color: var(--bg-retro-cream) transparent;
+  display: block;
+  width: 0;
+}
+
+.bubble-title {
+  font-family: var(--font-pixel);
+  font-size: 0.9rem;
+  color: #d63031;
+  margin-bottom: 8px;
+}
+
+.bubble-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted-dark);
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+/* Card Game Over */
+.arcade-gameover-card {
+  background: #2d0f47;
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard-pink);
+  padding: 24px 32px;
+  text-align: center;
+  max-width: 500px;
+}
+
+.gameover-title {
+  font-family: var(--font-pixel);
+  font-size: 1.5rem;
+  color: var(--neon-pink);
+  text-shadow: 3px 3px 0px #000;
+  margin-bottom: 8px;
+}
+
+.gameover-reason {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 14px;
+}
+
+.gameover-score-wrap {
+  background: var(--bg-deep-space);
+  border: 2px solid var(--border-dark);
+  padding: 8px 16px;
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  margin-bottom: 18px;
+}
+
+.score-highlight {
+  color: var(--neon-yellow);
+  font-size: 1rem;
+  margin-left: 8px;
+}
+
+.gameover-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Rodapé do Arcade */
+.arcade-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: #17092c;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.key-badge {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  border: 1px solid #000;
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  box-shadow: 1px 1px 0px #000;
+}
+
+.arcade-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--neon-green);
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--neon-green);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--neon-green);
+}
+
+/* --------------------------------------------------------------------------
+   7. BOTÕES RETRÔ PIXEL ART & NEO-BRUTALIST
+   -------------------------------------------------------------------------- */
+.retro-pixel-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  padding: 10px 18px;
+  border: 3px solid var(--border-dark);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  user-select: none;
+}
+
+.retro-pixel-btn.primary {
+  background: var(--neon-pink);
+  color: #fff;
+  box-shadow: var(--shadow-hard-sm);
+}
+
+.retro-pixel-btn.primary:hover {
+  background: var(--neon-pink-hover);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #000;
+}
+
+.retro-pixel-btn.primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000;
+}
+
+.retro-pixel-btn.warning {
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+  box-shadow: var(--shadow-hard-sm);
+}
+
+.retro-pixel-btn.warning:hover {
+  background: #ffdb80;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #000;
+}
+
+.retro-pixel-btn.secondary {
+  background: var(--bg-mint-soft);
+  color: var(--text-dark);
+  box-shadow: var(--shadow-hard-sm);
+}
+
+.retro-pixel-btn.secondary:hover {
+  background: #bbf0dd;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #000;
+}
+
+.retro-pixel-btn.full-width {
+  width: 100%;
+}
+
+.pulse {
+  animation: btnPulse 1.4s infinite alternate ease-in-out;
+}
+
+@keyframes btnPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.04); }
+}
+
+/* --------------------------------------------------------------------------
+   8. SEÇÃO 2: ABOUT ME (VIBE TUMBLR & RETRO OS)
+   -------------------------------------------------------------------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Card de Perfil Esquerdo */
+.profile-sidebar-card {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+}
+
+.status-online {
+  font-size: 0.65rem;
+  color: #0b8457;
+  font-weight: bold;
+}
+
+.profile-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.avatar-frame {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  background: #391866;
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pixel Avatar Feito em CSS Puro */
+.pixel-avatar-art {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background: #ffd3b6;
+  border: 3px solid #000;
+  box-shadow: inset -4px -4px 0px #e09f7a;
+}
+
+.avatar-hair {
+  position: absolute;
+  top: -8px;
+  left: -4px;
+  width: 88px;
+  height: 28px;
+  background: #4a2800;
+  border: 3px solid #000;
+  box-shadow: 0 4px 0px #704008;
+}
+
+.avatar-eyes {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 16px;
+}
+
+.eye {
+  display: inline-block;
+  width: 8px;
+  height: 12px;
+  background: #120624;
+  border-radius: 1px;
+}
+
+.avatar-blush {
+  position: absolute;
+  top: 44px;
+  left: 8px;
+  width: 64px;
+  height: 6px;
+  background: transparent;
+  box-shadow: 4px 0 0 #ff7597, 52px 0 0 #ff7597;
+}
+
+.avatar-smile {
+  position: absolute;
+  top: 50px;
+  left: 32px;
+  width: 16px;
+  height: 6px;
+  border-bottom: 3px solid #000;
+  border-radius: 0 0 8px 8px;
+}
+
+.avatar-badge {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  padding: 4px 8px;
+  border: 2px solid var(--border-dark);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.player-name {
+  font-family: var(--font-pixel);
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-top: 4px;
+}
+
+.player-role {
+  font-size: 0.8rem;
+  color: var(--text-muted-dark);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Barras de Status / HP & Mana */
+.status-meter-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fff;
+  border: 2px solid var(--border-dark);
+  padding: 10px;
+  box-shadow: 2px 2px 0px #000;
+}
+
+.meter-item {
+  width: 100%;
+}
+
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.meter-num {
+  font-weight: bold;
+}
+
+.retro-progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #e2d7c0;
+  border: 2px solid var(--border-dark);
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.bar-fill.hp-fill {
+  background: repeating-linear-gradient(
+    45deg,
+    #ff4757,
+    #ff4757 6px,
+    #ff6b81 6px,
+    #ff6b81 12px
+  );
+}
+
+.bar-fill.mana-fill {
+  background: repeating-linear-gradient(
+    45deg,
+    #2ed573,
+    #2ed573 6px,
+    #7bed9f 6px,
+    #7bed9f 12px
+  );
+}
+
+/* Tumblr Music Widget */
+.tumblr-music-widget {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-deep-space);
+  color: var(--text-light);
+  border: 2px solid var(--border-dark);
+  padding: 8px 10px;
+  box-shadow: 2px 2px 0px #000;
+}
+
+.music-disc-icon {
+  font-size: 1.2rem;
+}
+
+.spin-anim {
+  animation: spinDisc 4s linear infinite;
+}
+
+@keyframes spinDisc {
+  100% { transform: rotate(360deg); }
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  flex: 1;
+}
+
+.track-title {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--neon-yellow);
+}
+
+.track-artist {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.music-equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.music-equalizer span {
+  width: 3px;
+  background: var(--neon-pink);
+  animation: eqBounce 0.8s infinite alternate ease-in-out;
+}
+
+.music-equalizer span:nth-child(2) { animation-delay: 0.2s; }
+.music-equalizer span:nth-child(3) { animation-delay: 0.4s; }
+.music-equalizer span:nth-child(4) { animation-delay: 0.1s; }
+
+@keyframes eqBounce {
+  0% { height: 2px; }
+  100% { height: 14px; }
+}
+
+/* Nuvem de Tags Tumblr */
+.tumblr-tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.t-tag {
+  font-size: 0.7rem;
+  background: var(--bg-retro-beige-dark);
+  color: var(--text-dark);
+  padding: 2px 6px;
+  border: 1px dashed var(--border-dark);
+}
+
+/* Coluna Direita: Balão Pixel & Trajetória */
+.about-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Balão de Diálogo Estilo RPG Retrô com Borda Pontilhada */
+.pixel-dialog-balloon {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  border: 3px solid var(--border-dark);
+  outline: 2px dashed #ff3c89;
+  outline-offset: -7px;
+  box-shadow: var(--shadow-hard);
+  padding: 22px 24px;
+  position: relative;
+}
+
+.dialog-speaker-tab {
+  display: inline-block;
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  background: var(--neon-pink);
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  padding: 4px 10px;
+  border: 2px solid var(--border-dark);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.dialog-body-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Janela de Bio & Trajetória */
+.bio-window {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+}
+
+.bio-content-body {
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.bio-pill-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  background: var(--bg-mint-soft);
+  color: var(--text-dark);
+  padding: 8px 12px;
+  border: 2px solid var(--border-dark);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.pill-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #000;
+}
+
+.bio-step-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border: 2px solid var(--border-dark);
+  padding: 16px;
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform var(--transition-fast);
+}
+
+.bio-step-card:hover {
+  transform: translateX(4px);
+}
+
+.bio-step-card.highlight-step {
+  border-left: 6px solid var(--neon-pink);
+  background: #fffaf5;
+}
+
+.step-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.step-desc h3 {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.step-desc p {
+  font-size: 0.85rem;
+  color: var(--text-muted-dark);
+  line-height: 1.6;
+}
+
+.skills-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 2px dashed #c0b396;
+}
+
+.skill-chip {
+  font-family: var(--font-pixel);
+  font-size: 0.58rem;
+  background: var(--bg-deep-space);
+  color: var(--neon-yellow);
+  padding: 6px 10px;
+  border: 2px solid var(--border-dark);
+  box-shadow: 2px 2px 0px #000;
+  transition: transform 0.1s ease;
+}
+
+.skill-chip:hover {
+  transform: translateY(-2px);
+  background: var(--neon-pink);
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   9. SEÇÃO 3: PROJETO DE DESTAQUE (PAC-MAN SEMÂNTICO EM VR)
+   -------------------------------------------------------------------------- */
+.flagship-window {
+  background: var(--bg-arcade-purple);
+  border: 4px solid var(--border-dark);
+  box-shadow: 8px 8px 0px #000;
+}
+
+.flagship-icon {
+  font-size: 1.2rem;
+}
+
+.flagship-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+  padding: 4px 8px;
+  border: 2px solid #000;
+  box-shadow: 1px 1px 0px #000;
+}
+
+.flagship-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Marquee & Hero do Projeto */
+.flagship-hero-banner {
+  background: #190930;
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard-pink);
+  padding: 24px;
+  text-align: center;
+}
+
+.hero-subtext {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: var(--neon-cyan);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.hero-main-title {
+  font-family: var(--font-pixel);
+  font-size: 1.6rem;
+  color: var(--neon-yellow);
+  text-shadow: 3px 3px 0px #000;
+  margin-bottom: 12px;
+}
+
+.hero-tagline {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Grid: Dor vs Solução */
+.flagship-grid-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.retro-box {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard);
+  position: relative;
+  overflow: hidden;
+}
+
+.box-header-ribbon {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  padding: 10px 14px;
+  border-bottom: 3px solid var(--border-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.box-header-ribbon.red-ribbon {
+  background: #ff5252;
+  color: #fff;
+}
+
+.box-header-ribbon.green-ribbon {
+  background: var(--bg-mint-soft);
+  color: var(--text-dark);
+}
+
+.box-inner-text {
+  padding: 20px;
+  font-size: 0.9rem;
+}
+
+.pixel-list {
+  list-style: none;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pixel-list li {
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.pixel-list li::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  color: var(--neon-pink);
+  font-size: 0.7rem;
+}
+
+.pixel-list code {
+  background: var(--bg-retro-beige-dark);
+  color: #d63031;
+  padding: 1px 4px;
+  font-family: var(--font-mono);
+  border: 1px solid var(--border-dark);
+  font-weight: bold;
+}
+
+/* Diagrama de Arquitetura */
+.architecture-container {
+  background: #17082c;
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard);
+  padding: 20px;
+}
+
+.arch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  color: var(--neon-yellow);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #401b70;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.arch-badge {
+  background: var(--bg-mint-soft);
+  color: var(--text-dark);
+  padding: 2px 6px;
+  border: 1px solid #000;
+}
+
+.arch-flow-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.arch-node {
+  flex: 1;
+  min-width: 220px;
+  background: var(--bg-card-purple);
+  border: 2px solid var(--border-dark);
+  box-shadow: var(--shadow-hard-sm);
+  padding: 16px;
+  text-align: center;
+}
+
+.arch-node.highlight-node {
+  border-color: var(--neon-pink);
+  background: #3f196f;
+}
+
+.node-icon {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.node-title {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: var(--neon-yellow);
+  margin-bottom: 4px;
+}
+
+.node-sub {
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.node-details {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.arch-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-pixel);
+  color: var(--neon-pink);
+  font-size: 0.65rem;
+}
+
+.arrow-label {
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Especificações Técnicas & Telemetria VR */
+.specs-and-demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.specs-box, .vr-preview-box {
+  padding: 20px;
+}
+
+.box-title {
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-dark);
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.specs-table td {
+  padding: 8px 10px;
+  border-bottom: 1px dashed #d5c8ad;
+}
+
+.spec-prop {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--neon-pink);
+  width: 35%;
+}
+
+.spec-val {
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+/* Terminal de Telemetria VR */
+.vr-hud-display {
+  background: #090312;
+  border: 2px solid var(--border-dark);
+  padding: 14px;
+  font-family: var(--font-terminal);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--text-light);
+  min-height: 145px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.hud-tag {
+  color: var(--neon-cyan);
+}
+
+.hud-line.success {
+  color: var(--neon-green);
+}
+
+/* --------------------------------------------------------------------------
+   10. SEÇÃO 4: CHECKPOINTS DE CARREIRA (RPG TIMELINE)
+   -------------------------------------------------------------------------- */
+.checkpoints-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.checkpoints-timeline::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  width: 6px;
+  background: var(--bg-card-purple);
+  border: 2px solid var(--border-dark);
+}
+
+.checkpoint-card {
+  position: relative;
+}
+
+.checkpoint-badge {
+  position: absolute;
+  top: -12px;
+  left: -32px;
+  background: var(--neon-pink);
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  padding: 4px 8px;
+  border: 2px solid var(--border-dark);
+  box-shadow: 2px 2px 0px #000;
+  z-index: 2;
+}
+
+.checkpoint-card.current-level .checkpoint-badge {
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+}
+
+.checkpoint-content {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+}
+
+.date-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  background: var(--bg-deep-space);
+  color: var(--neon-yellow);
+  padding: 2px 8px;
+  border: 1px solid #000;
+}
+
+.date-badge.highlight-date {
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+}
+
+.checkpoint-body {
+  padding: 20px;
+}
+
+.checkpoint-title {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.checkpoint-org {
+  font-size: 0.8rem;
+  color: var(--neon-pink);
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.checkpoint-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted-dark);
+  margin-bottom: 14px;
+}
+
+.checkpoint-loot {
+  background: var(--bg-retro-beige-dark);
+  border: 1px dashed var(--border-dark);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+}
+
+.loot-label {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: #b33939;
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   11. SEÇÃO 5: BLOG / DIÁRIO DE BORDO ESTILO TUMBLR
+   -------------------------------------------------------------------------- */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.tumblr-post-card {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+}
+
+.post-meta-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.post-author-name {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+}
+
+.post-date {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--text-muted-dark);
+}
+
+.post-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-title {
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-dark);
+}
+
+.post-body p {
+  font-size: 0.85rem;
+  color: var(--text-muted-dark);
+  line-height: 1.6;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.post-tags a {
+  font-size: 0.75rem;
+  color: #1e3799;
+  text-decoration: none;
+  font-style: italic;
+}
+
+.post-tags a:hover {
+  text-decoration: underline;
+  color: var(--neon-pink);
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #f0e6cf;
+  border-top: 2px solid var(--border-dark);
+}
+
+.stat-notes {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--text-muted-dark);
+}
+
+.post-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.tumblr-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  background: #fff;
+  color: var(--text-dark);
+  border: 2px solid var(--border-dark);
+  padding: 6px 10px;
+  box-shadow: 2px 2px 0px #000;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.1s ease;
+}
+
+.tumblr-btn:hover {
+  transform: translate(-1px, -1px);
+}
+
+.tumblr-btn.liked {
+  background: var(--neon-pink);
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   12. MODAL DE SIMULAÇÃO DE ONTOLOGIA EM VR
+   -------------------------------------------------------------------------- */
+.retro-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(14, 5, 25, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.2s ease;
+}
+
+.retro-modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.modal-window {
+  width: 100%;
+  max-width: 680px;
+  background: var(--bg-card-purple);
+}
+
+.modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-status-marquee {
+  background: #110521;
+  border: 2px solid var(--border-dark);
+  padding: 8px 12px;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: var(--neon-green);
+}
+
+.modal-console {
+  background: #090312;
+  border: 3px solid var(--border-dark);
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+.console-line {
+  color: #d1c7e0;
+}
+
+.text-cyan { color: var(--neon-cyan); }
+.text-green { color: var(--neon-green); }
+.text-yellow { color: var(--neon-yellow); }
+.text-pink { color: var(--neon-pink); }
+
+.modal-interactive-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   13. TOAST DE NOTIFICAÇÃO RETRÔ
+   -------------------------------------------------------------------------- */
+.retro-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard);
+  padding: 12px 18px;
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+
+.retro-toast.hidden {
+  transform: translateY(100px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   14. RODAPÉ DA PÁGINA
+   -------------------------------------------------------------------------- */
+.page-footer {
+  background: var(--bg-deep-space);
+  border-top: 3px solid var(--border-dark);
+  padding: 32px 20px;
+  margin-top: 40px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: var(--neon-pink);
+  margin-bottom: 6px;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.footer-chip {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  background: var(--bg-card-purple);
+  color: var(--neon-yellow);
+  padding: 6px 10px;
+  border: 2px solid var(--border-dark);
+  box-shadow: 2px 2px 0px #000;
+}
+
+/* --------------------------------------------------------------------------
+   15. EFEITO GLITCH DE TEXTO
+   -------------------------------------------------------------------------- */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #00ffff;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #ff00c1;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 30px, 0); }
+  20% { clip: rect(60px, 9999px, 75px, 0); }
+  40% { clip: rect(20px, 9999px, 50px, 0); }
+  60% { clip: rect(80px, 9999px, 100px, 0); }
+  80% { clip: rect(40px, 9999px, 60px, 0); }
+  100% { clip: rect(70px, 9999px, 90px, 0); }
+}
+
+/* --------------------------------------------------------------------------
+   17. ESTILOS DAS CAIXAS DE DIÁLOGO RETRÔ POR NÍVEL (ABOUT ME RPG)
+   -------------------------------------------------------------------------- */
+.dialog-level-box {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  border: 3px solid var(--border-dark);
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.dialog-level-box:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
+}
+
+.dialog-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.level-pill {
+  font-family: var(--font-pixel);
+  font-size: 0.58rem;
+  background: var(--bg-deep-space);
+  color: #fff;
+  padding: 3px 6px;
+  border: 1px solid #000;
+  box-shadow: 1px 1px 0px #000;
+}
+
+.level-pill.yellow-pill {
+  background: var(--neon-yellow);
+  color: var(--text-dark);
+}
+
+.level-pill.pink-pill {
+  background: var(--neon-pink);
+  color: #fff;
+}
+
+.level-status-icon {
+  font-size: 1.1rem;
+}
+
+.dialog-level-body {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dialog-narrative {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.dialog-tags-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed #d0c4a8;
+}
+
+.dialog-mini-tag {
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  background: #f0e4c6;
+  color: #3b2853;
+  padding: 3px 6px;
+  border: 1px solid var(--border-dark);
+}
+
+/* Boss Level Box Highlight */
+.highlight-boss-box {
+  border: 3px solid var(--neon-pink);
+  box-shadow: var(--shadow-hard-pink);
+}
+
+.highlight-boss-box:hover {
+  box-shadow: 6px 6px 0px var(--neon-pink);
+}
+
+/* Checkpoint Callout Final */
+.checkpoint-callout {
+  background: #fffbf0;
+  border-color: #000;
+  outline-color: var(--neon-yellow);
+}
+
+.yellow-tab {
+  background: var(--neon-yellow) !important;
+  color: var(--text-dark) !important;
+}
+
+.checkpoint-lead-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+
+.checkpoint-btn-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   18. SELETOR DE PERSONAGEM NO ARCADE (CHOOSE YOUR CHARACTER)
+   -------------------------------------------------------------------------- */
+.character-selector-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.char-select-label {
+  font-family: var(--font-pixel);
+  font-size: 0.58rem;
+  color: var(--neon-yellow);
+}
+
+.char-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.char-pill {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  background: var(--bg-card-purple);
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+  padding: 4px 8px;
+  box-shadow: 1px 1px 0px #000;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.char-pill:hover {
+  background: var(--neon-purple);
+  transform: translateY(-1px);
+}
+
+.char-pill.active {
+  background: var(--neon-pink);
+  color: #fff;
+  border-color: #000;
+  box-shadow: 2px 2px 0px #000;
+}
+
+/* --------------------------------------------------------------------------
+   19. SEÇÃO DE CONTATO (INSERT COIN & TUMBLR ASK BOX)
+   -------------------------------------------------------------------------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.coin-slot-card {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+}
+
+.coin-blink {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: #c0392b;
+  animation: blinkAnim 0.9s infinite alternate;
+}
+
+.coin-slot-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.coin-art-box {
+  background: #140727;
+  border: 3px solid var(--border-dark);
+  padding: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.coin-hole {
+  width: 50px;
+  height: 8px;
+  background: #000;
+  border: 2px solid #555;
+  border-radius: 4px;
+}
+
+.coin-label {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--neon-yellow);
+}
+
+.contact-card-title {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+.contact-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted-dark);
+  line-height: 1.6;
+}
+
+.social-pills-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.social-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: var(--text-dark);
+  text-decoration: none;
+  border: 2px solid var(--border-dark);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  box-shadow: 2px 2px 0px #000;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.social-pill:hover {
+  transform: translateX(4px);
+  background: var(--bg-mint-soft);
+}
+
+.social-pill.highlight-pill {
+  background: #fff0f5;
+  border-color: var(--neon-pink);
+}
+
+.social-pill.highlight-pill:hover {
+  background: var(--neon-pink);
+  color: #fff;
+}
+
+.social-arrow {
+  margin-left: auto;
+  font-weight: bold;
+}
+
+/* Ask Box */
+.askbox-card {
+  background: var(--bg-retro-cream);
+  color: var(--text-dark);
+}
+
+.askbox-inner {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.askbox-speech-lead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 2px dashed #ff3c89;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.lead-avatar {
+  font-size: 1.6rem;
+}
+
+.retro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-family: var(--font-pixel);
+  font-size: 0.58rem;
+  color: var(--text-dark);
+}
+
+.retro-input, .retro-textarea {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  background: #fff;
+  color: var(--text-dark);
+  border: 2px solid var(--border-dark);
+  box-shadow: 2px 2px 0px #000;
+  outline: none;
+}
+
+.retro-input:focus, .retro-textarea:focus {
+  border-color: var(--neon-pink);
+  box-shadow: 3px 3px 0px var(--neon-pink);
+}
+
+.form-footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.form-note {
+  font-size: 0.72rem;
+  color: var(--text-muted-dark);
+}
+
+/* --------------------------------------------------------------------------
+   20. MODAL TERMINAL CLI RETRO
+   -------------------------------------------------------------------------- */
+.terminal-window {
+  width: 100%;
+  max-width: 680px;
+  background: #090314;
+}
+
+.terminal-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #090314;
+}
+
+.terminal-logs {
+  background: #05010a;
+  border: 2px solid #2f1250;
+  padding: 14px;
+  height: 240px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+.term-line {
+  color: #e4ddf0;
+}
+
+.cmd-highlight {
+  color: var(--neon-yellow);
+  font-weight: bold;
+}
+
+.terminal-prompt-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #140728;
+  border: 2px solid var(--border-dark);
+  padding: 8px 12px;
+}
+
+.prompt-prefix {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--neon-green);
+}
+
+.term-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   16. RESPONSIVIDADE (MOBILE & TABLET)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flagship-grid-columns,
+  .specs-and-demo-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-viewport {
+    height: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .retro-navbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-links {
+    justify-content: center;
+  }
+
+  .nav-toggles {
+    justify-content: center;
+  }
+
+  .arcade-header-hud {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .arcade-hud-stats {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .arcade-title {
+    font-size: 1rem;
+  }
+
+  .canvas-viewport {
+    height: 180px;
+  }
+
+  .checkpoints-timeline {
+    padding-left: 20px;
+  }
+
+  .checkpoint-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  .arch-flow-grid {
+    flex-direction: column;
+  }
+
+  .arch-arrow {
+    transform: rotate(90deg);
+    margin: 10px 0;
+  }
+}
+

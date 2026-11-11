@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lana | Portfólio Arcade & Web Semântica</title>
+  
+  <!-- Fontes Retrô do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap" rel="stylesheet">
+  
+  <!-- Estilos Principais -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="crt-enabled">
+  <!-- Scanline CRT Overlay (pode ser ativado/desativado nas preferências) -->
+  <div class="crt-overlay" id="crtOverlay" aria-hidden="true"></div>
+
+  <!-- Barra Superior / Menu Retro Neo-Brutalist -->
+  <header class="top-nav-container">
+    <nav class="retro-navbar">
+      <div class="nav-brand">
+        <span class="brand-icon">👾</span>
+        <span class="brand-title">LANA.EXE</span>
+        <span class="brand-tag">v2.4 [SENAC &bull; CIn-UFPE]</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#arcade-section" class="nav-btn"><span class="btn-prefix">&gt;</span> MINIJOGO</a>
+        <a href="#about-section" class="nav-btn"><span class="btn-prefix">&gt;</span> SOBRE MIM</a>
+        <a href="#projects-section" class="nav-btn highlight-link"><span class="btn-prefix">&gt;</span> PAC-MAN SEMÂNTICO</a>
+        <a href="#checkpoints-section" class="nav-btn"><span class="btn-prefix">&gt;</span> CHECKPOINTS</a>
+        <a href="#blog-section" class="nav-btn"><span class="btn-prefix">&gt;</span> DIÁRIO TUMBLR</a>
+        <a href="#contact-section" class="nav-btn"><span class="btn-prefix">&gt;</span> CONTATO</a>
+      </div>
+
+      <div class="nav-toggles">
+        <button id="terminalToggleBtn" class="toggle-pill" title="Abrir Terminal CLI Retro">
+          <span class="toggle-icon">⌨️</span> <span class="toggle-text">CLI</span>
+        </button>
+        <button id="audioToggleBtn" class="toggle-pill" title="Alternar Efeitos Sonoros 8-Bit">
+          <span class="toggle-icon">🔊</span> <span class="toggle-text">SFX: ON</span>
+        </button>
+        <button id="crtToggleBtn" class="toggle-pill active" title="Alternar Efeito Monitor CRT">
+          <span class="toggle-icon">📺</span> <span class="toggle-text">CRT: ON</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-container">
+
+    <!-- ========================================== -->
+    <!-- 1. MINIJOGO RETRO ARCADE (PAC-RUNNER)     -->
+    <!-- ========================================== -->
+    <section id="arcade-section" class="arcade-card-wrapper">
+      <div class="retro-window arcade-window">
+        <!-- Barra de Título Janela Retrô -->
+        <div class="window-titlebar">
+          <div class="window-title-group">
+            <span class="title-square"></span>
+            <span class="title-text">ARCADE_STATION // PAC_RUNNER_V1.0.ROM</span>
+          </div>
+          <div class="window-controls">
+            <span class="win-btn win-min">_</span>
+            <span class="win-btn win-max">□</span>
+            <span class="win-btn win-close">✕</span>
+          </div>
+        </div>
+
+        <!-- Banner Let's Play & HUD -->
+        <div class="arcade-header-hud">
+          <div class="arcade-marquee">
+            <span class="blinking-star">★</span>
+            <h1 class="arcade-title">LET'S PLAY GAME</h1>
+            <span class="blinking-star">★</span>
+          </div>
+          <div class="arcade-hud-stats">
+            <div class="hud-box">
+              <span class="hud-label">SCORE</span>
+              <span id="currentScore" class="hud-value">00000</span>
+            </div>
+            <div class="hud-box highlight">
+              <span class="hud-label">HIGH SCORE</span>
+              <span id="highScore" class="hud-value">00000</span>
+            </div>
+            <div class="hud-box">
+              <span class="hud-label">SPEED</span>
+              <span id="gameSpeedDisplay" class="hud-value">1.0x</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Área do Canvas do Jogo -->
+        <div class="canvas-viewport" id="gameViewport">
+          <canvas id="pacGameCanvas" width="840" height="240"></canvas>
+          
+          <!-- Overlay de Início -->
+          <div id="gameStartOverlay" class="canvas-ui-overlay">
+            <div class="arcade-speech-bubble">
+              <p class="bubble-title">PRONTA PARA O DESAFIO?</p>
+              <p class="bubble-sub">Pressione [ESPAÇO] ou clique na tela para saltar os fantasminhas!</p>
+              <button id="btnStartGame" class="retro-pixel-btn primary pulse">
+                ▶ INICIAR JOGO
+              </button>
+            </div>
+          </div>
+
+          <!-- Overlay de Game Over -->
+          <div id="gameOverOverlay" class="canvas-ui-overlay hidden">
+            <div class="arcade-gameover-card">
+              <h2 class="gameover-title glitch-text" data-text="GAME OVER">GAME OVER</h2>
+              <p class="gameover-reason">Você colidiu com um fantasma da inconsistência!</p>
+              <div class="gameover-score-wrap">
+                <span>PONTOS OBTIDOS:</span>
+                <span id="finalScoreVal" class="score-highlight">0</span>
+              </div>
+              <div class="gameover-actions">
+                <button id="btnRestartGame" class="retro-pixel-btn warning">
+                  ↻ JOGAR NOVAMENTE
+                </button>
+                <a href="#about-section" class="retro-pixel-btn secondary">
+                  ↓ CONTINUAR EXPLORANDO
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rodapé do Arcade / Instruções Rápidas & Seletor de Personagem -->
+        <div class="arcade-footer">
+          <div class="control-tip">
+            <span class="key-badge">ESPAÇO</span> ou <span class="key-badge">CLIQUE / TOQUE</span> = SALTO DO PAC-MAN
+          </div>
+          <div class="character-selector-wrap">
+            <span class="char-select-label">PERSONAGEM:</span>
+            <div class="char-pills">
+              <button class="char-pill active" data-skin="classic" title="Pac-Man Clássico">🟡 Clássico</button>
+              <button class="char-pill" data-skin="mspac" title="Ms. Pac-Man (Laço Rosa)">🎀 Ms. Pac</button>
+              <button class="char-pill" data-skin="cyborg" title="Cyborg VR (Visor Ciano)">🥽 Cyborg VR</button>
+              <button class="char-pill" data-skin="bio" title="Bio-Cell (Verde Menta)">🧬 Bio-Cell</button>
+            </div>
+          </div>
+          <div class="arcade-status-badge">
+            <span class="status-indicator"></span> SISTEMA PRONTO &bull; 60 FPS
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. SEÇÃO ABOUT ME (ESTÉTICA TUMBLR & OS)   -->
+    <!-- ========================================== -->
+    <section id="about-section" class="section-container">
+      <div class="section-title-tag">
+        <span class="tag-hash">#</span> PROFILE_VIEWER // ABOUT_ME
+      </div>
+
+      <div class="about-grid">
+        <!-- Coluna da Esquerda: Avatar, Status & Vibe Tumblr -->
+        <div class="retro-window profile-sidebar-card">
+          <div class="window-titlebar mint-bar">
+            <span class="title-text">PLAYER_CARD.PNG</span>
+            <span class="status-online">● ONLINE</span>
+          </div>
+          <div class="profile-card-content">
+            <div class="avatar-frame">
+              <!-- Pixel Art Avatar com animação de moldura -->
+              <div class="pixel-avatar-art">
+                <div class="avatar-pixel-face">
+                  <div class="avatar-hair"></div>
+                  <div class="avatar-eyes">
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                  </div>
+                  <div class="avatar-smile"></div>
+                  <div class="avatar-blush"></div>
+                </div>
+              </div>
+              <div class="avatar-badge">LVL 24</div>
+            </div>
+
+            <h2 class="player-name">LANA</h2>
+            <p class="player-role">Bióloga &bull; Desenvolvedora &bull; Mestranda CIn-UFPE</p>
+
+            <div class="status-meter-group">
+              <div class="meter-item">
+                <div class="meter-label">
+                  <span>HP (CAFÉ & FOCO)</span>
+                  <span class="meter-num">98/100</span>
+                </div>
+                <div class="retro-progress-bar">
+                  <div class="bar-fill hp-fill" style="width: 98%;"></div>
+                </div>
+              </div>
+
+              <div class="meter-item">
+                <div class="meter-label">
+                  <span>MANA (PESQUISA CIn)</span>
+                  <span class="meter-num">100/100</span>
+                </div>
+                <div class="retro-progress-bar">
+                  <div class="bar-fill mana-fill" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mini Widget Tumblr Music Player -->
+            <div class="tumblr-music-widget">
+              <div class="music-disc-icon spin-anim">💿</div>
+              <div class="music-info">
+                <span class="track-title">Lofi Synthwave Lab</span>
+                <span class="track-artist">8-Bit Ontologies Radio</span>
+              </div>
+              <span class="music-equalizer">
+                <span></span><span></span><span></span><span></span>
+              </span>
+            </div>
+
+            <!-- Tags Estilo Tumblr -->
+            <div class="tumblr-tags-cloud">
+              <span class="t-tag">#BiologiaUFRPE</span>
+              <span class="t-tag">#FiocruzPE</span>
+              <span class="t-tag">#SENACPE</span>
+              <span class="t-tag">#CInUFPE</span>
+              <span class="t-tag">#WebSemantica</span>
+              <span class="t-tag">#RealidadeVirtual</span>
+              <span class="t-tag">#Unity6</span>
+              <span class="t-tag">#PacManSemantico</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna da Direita: Diálogos Retrô por Níveis (Caixas de Texto RPG) -->
+        <div class="about-main-content">
+          
+          <!-- Introdução Geral / Caixa de Fala Principal -->
+          <div class="pixel-dialog-balloon">
+            <div class="dialog-speaker-tab">LANA.EXE // DIÁLOGO_RETRÔ</div>
+            <div class="dialog-body-text">
+              <p>
+                👾 <em>"Pressione os níveis abaixo para acompanhar cada fase da minha jornada — da bancada da Fiocruz até a Realidade Virtual no CIn-UFPE!"</em>
+              </p>
+            </div>
+          </div>
+
+          <!-- Nível 1: A Origem (Ciências Biológicas) -->
+          <div class="retro-window dialog-level-box">
+            <div class="window-titlebar mint-bar">
+              <div class="dialog-header-left">
+                <span class="level-pill">LVL 1</span>
+                <span class="title-text">A ORIGEM // CIÊNCIAS BIOLÓGICAS (UFRPE & FIOCRUZ-PE)</span>
+              </div>
+              <span class="level-status-icon">🧬</span>
+            </div>
+            <div class="dialog-level-body">
+              <p class="dialog-narrative">
+                "Iniciei minha jornada acadêmica na graduação em Ciências Biológicas pela UFRPE. A biologia é vasta, e acabei experimentando várias áreas: passei por histologia, anatomia e até comportamento animal com primatas. Mas foi na parasitologia que me encontrei de verdade, o que me levou a realizar meu PIBIC e meu TCC lá na Fiocruz-PE. Eu respirava ciência e pesquisa de bancada!"
+              </p>
+              <div class="dialog-tags-bar">
+                <span class="dialog-mini-tag">#UFRPE</span>
+                <span class="dialog-mini-tag">#FiocruzPE</span>
+                <span class="dialog-mini-tag">#Parasitologia</span>
+                <span class="dialog-mini-tag">#PesquisaDeBancada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nível 2: A Grande Virada (Computação & SENAC) -->
+          <div class="retro-window dialog-level-box">
+            <div class="window-titlebar cream-bar">
+              <div class="dialog-header-left">
+                <span class="level-pill yellow-pill">LVL 2</span>
+                <span class="title-text">A GRANDE VIRADA // COMPUTAÇÃO & SENAC-PE</span>
+              </div>
+              <span class="level-status-icon">💻</span>
+            </div>
+            <div class="dialog-level-body">
+              <p class="dialog-narrative">
+                "Depois de uma longa jornada na biologia, decidi mudar tudo e trocar de curso. Entrei para a área da computação no SENAC-PE. Confesso que foi onde encontrei mais oportunidades e me apaixonei por coisas que jamais imaginaria que conseguiria gostar. E não parei por aí: antes mesmo de terminar a graduação, dei início ao mestrado em Ciência da Computação no CIn-UFPE, focando em Inteligência Computacional e Web Semântica."
+              </p>
+              <div class="dialog-tags-bar">
+                <span class="dialog-mini-tag">#SENACPE</span>
+                <span class="dialog-mini-tag">#CInUFPE</span>
+                <span class="dialog-mini-tag">#InteligenciaComputacional</span>
+                <span class="dialog-mini-tag">#WebSemantica</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nível 3: O Boss Final (O Pac-Man Semântico) -->
+          <div class="retro-window dialog-level-box highlight-boss-box">
+            <div class="window-titlebar flagship-bar">
+              <div class="dialog-header-left">
+                <span class="level-pill pink-pill">LVL 3 &bull; BOSS</span>
+                <span class="title-text">O BOSS FINAL // O PAC-MAN SEMÂNTICO (VR + PROTÉGÉ)</span>
+              </div>
+              <span class="level-status-icon">🕹️</span>
+            </div>
+            <div class="dialog-level-body">
+              <p class="dialog-narrative">
+                "No começo do mestrado, comecei a estudar ontologias. Eu simplesmente não conseguia entender nada e confesso que me perdi bastante no assunto. Tudo parecia muito abstrato e burocrático no Protégé. A chave virou quando entrei na cadeira de Realidade Virtual e Aumentada: minha mente expandiu e vi a oportunidade perfeita para o meu projeto, onde eu estava tão perdida. Foi assim que nasceu o Pac-Man Semântico — uma ferramenta em Unity onde você entra literalmente na ontologia, explora labirintos, segue placas de sinalização taxonômica e entende de forma interativa por que a representação de conhecimento pode (e deve) ser divertida e acessível."
+              </p>
+              <div class="dialog-tags-bar">
+                <span class="dialog-mini-tag">#Ontologias</span>
+                <span class="dialog-mini-tag">#Protege</span>
+                <span class="dialog-mini-tag">#RealidadeVirtual</span>
+                <span class="dialog-mini-tag">#Unity6</span>
+                <span class="dialog-mini-tag">#MetaQuest3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checkpoint Final / Convite para a Aba de Projetos -->
+          <div class="pixel-dialog-balloon checkpoint-callout">
+            <div class="dialog-speaker-tab yellow-tab">CHECKPOINT FINAL 🚩</div>
+            <div class="dialog-body-text">
+              <p class="checkpoint-lead-text">
+                "Quer entender melhor como essa imersão funciona? Dá uma olhadinha na aba de Projetos para ver o labirinto ciberfísico em ação!"
+              </p>
+              <div class="checkpoint-btn-wrap">
+                <a href="#projects-section" class="retro-pixel-btn primary pulse">
+                  🎮 EXPLORAR O PAC-MAN SEMÂNTICO NO LABIRINTO VR &gt;&gt;
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. PROJETO DESTAQUE: PAC-MAN SEMÂNTICO     -->
+    <!-- ========================================== -->
+    <section id="projects-section" class="section-container">
+      <div class="section-title-tag flagship-tag">
+        <span class="tag-hash">★</span> PROJETO_DE_DESTAQUE // PESQUISA_PRINCIPAL
+      </div>
+
+      <div class="retro-window flagship-window">
+        <!-- Topo da Janela do Projeto -->
+        <div class="window-titlebar flagship-bar">
+          <div class="window-title-group">
+            <span class="flagship-icon">🕹️</span>
+            <span class="title-text">PAC-MAN SEMÂNTICO: EXPLORAÇÃO IMERSIVA DE ONTOLOGIAS EM VR</span>
+          </div>
+          <span class="flagship-badge">MESTRADO CIn-UFPE &bull; UNITY 6 &bull; META QUEST 3</span>
+        </div>
+
+        <div class="flagship-body">
+          <!-- Marquee de Chamada -->
+          <div class="flagship-hero-banner">
+            <div class="hero-subtext">SUBVERTENDO O PARADIGMA 2D DO PROTÉGÉ COM REALIDADE VIRTUAL</div>
+            <h2 class="hero-main-title">PAC-MAN SEMÂNTICO</h2>
+            <p class="hero-tagline">
+              Uma ponte bidirecional entre a Lógica Descritiva (OWL) e a computação espacial imersiva no Meta Quest 3 via WebSockets em tempo real.
+            </p>
+          </div>
+
+          <!-- Grid de Explicação: A Dor vs A Solução -->
+          <div class="flagship-grid-columns">
+            
+            <!-- Card 1: A Dor dos Pesquisadores -->
+            <div class="retro-box pain-box">
+              <div class="box-header-ribbon red-ribbon">
+                <span class="box-symbol">⚠</span> A DOR DOS PESQUISADORES
+              </div>
+              <div class="box-inner-text">
+                <p>
+                  Criar e manter ontologias no software <strong>Protégé</strong> é frequentemente um processo árido, cognitivamente exaustivo e estático:
+                </p>
+                <ul class="pixel-list">
+                  <li><strong>Telas 2D sobrecarregadas:</strong> Grafos com centenas de classes geram nós emaranhados e perda de contexto espacial.</li>
+                  <li><strong>Dificuldade de depuração conceitual:</strong> Identificar incoerências lógicas entre axiomas requer ler dezenas de janelas de propriedades.</li>
+                  <li><strong>Falta de engajamento intuitivo:</strong> Apresentar ontologias para especialistas de domínio (ex: biólogos ou médicos) em matrizes de texto causa atrito e rejeição.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Card 2: A Proposta Inovadora -->
+            <div class="retro-box solution-box">
+              <div class="box-header-ribbon green-ribbon">
+                <span class="box-symbol">💡</span> A PROPOSTA INOVADORA
+              </div>
+              <div class="box-inner-text">
+                <p>
+                  O <strong>Pac-Man Semântico</strong> transforma o labirinto clássico em uma metáfora viva de conhecimento, onde o usuário caminha fisicamente pela ontologia no <strong>Meta Quest 3</strong>:
+                </p>
+                <ul class="pixel-list">
+                  <li><strong>Navegação na TBox (Corredores & Portais):</strong> As paredes e rotas do labirinto representam a taxonomia de classes (relações <code>subClassOf</code> e <code>is-a</code>), sinalizadas com placas de trânsito conceituais.</li>
+                  <li><strong>Coleta na ABox (Pastilhas & Axiomas):</strong> As instâncias e indivíduos tornam-se elementos interativos coletáveis, permitindo inspecionar asserções de dados em tempo real.</li>
+                  <li><strong>Agentes de Raciocínio (Fantasmas):</strong> Raciocinadores semânticos (HermiT/Pellet) atuam como os fantasmas do jogo, patrulhando ativamente os caminhos para validar restrições e alertar inconsistências lógicas!</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Diagrama de Arquitetura Interativo -->
+          <div class="architecture-container">
+            <div class="arch-header">
+              <span class="arch-title">FLUXO DE ARQUITETURA SISTÊMICA (WEBSOCKET + OWL API)</span>
+              <span class="arch-badge">LATÊNCIA &lt; 15ms</span>
+            </div>
+
+            <div class="arch-flow-grid">
+              
+              <div class="arch-node">
+                <div class="node-icon">🦉</div>
+                <div class="node-title">PROTÉGÉ / OWL 2</div>
+                <div class="node-sub">Ontologia Fonte (.owl / .ttl)</div>
+                <div class="node-details">TBox, ABox e restrições formais salvas em lógica descritiva.</div>
+              </div>
+
+              <div class="arch-arrow">
+                <span class="arrow-line">──────▶</span>
+                <span class="arrow-label">OWL API / Java</span>
+              </div>
+
+              <div class="arch-node highlight-node">
+                <div class="node-icon">⚡</div>
+                <div class="node-title">WEBSOCKET SERVER</div>
+                <div class="node-sub">Node.js / Python FastBridge</div>
+                <div class="node-details">Serialização JSON-RPC em tempo real com eventos de mutação e raciocínio.</div>
+              </div>
+
+              <div class="arch-arrow">
+                <span class="arrow-line">──────▶</span>
+                <span class="arrow-label">Full-Duplex WS</span>
+              </div>
+
+              <div class="arch-node">
+                <div class="node-icon">🥽</div>
+                <div class="node-title">UNITY 6 &bull; XR</div>
+                <div class="node-sub">Meta Quest 3 Standalone</div>
+                <div class="node-details">Geração procedural 3D de labirintos, sinalização taxonômica e agentes autônomos.</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Especificações Técnicas e Painel de Telemetria Interativo -->
+          <div class="specs-and-demo-grid">
+            <div class="retro-box specs-box">
+              <h3 class="box-title">ESPECIFICAÇÕES TÉCNICAS</h3>
+              <table class="specs-table">
+                <tbody>
+                  <tr>
+                    <td class="spec-prop">DISPOSITIVO</td>
+                    <td class="spec-val">Meta Quest 3 (Standalone XR)</td>
+                  </tr>
+                  <tr>
+                    <td class="spec-prop">ENGINE 3D</td>
+                    <td class="spec-val">Unity 6 LTS com XR Interaction Toolkit</td>
+                  </tr>
+                  <tr>
+                    <td class="spec-prop">COMUNICAÇÃO</td>
+                    <td class="spec-val">Protocolo WebSocket Bidirecional</td>
+                  </tr>
+                  <tr>
+                    <td class="spec-prop">SEMÂNTICA</td>
+                    <td class="spec-val">Protégé 5.6+, OWL 2 DL, RDF/XML</td>
+                  </tr>
+                  <tr>
+                    <td class="spec-prop">RACIOCINADOR</td>
+                    <td class="spec-val">HermiT / Pellet via Reasoner Bridge</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="retro-box vr-preview-box">
+              <h3 class="box-title">SIMULADOR DE TELEMETRIA VR</h3>
+              <div class="vr-hud-display">
+                <div class="hud-line"><span class="hud-tag">[STATUS]:</span> SESSÃO VR CONECTADA AO META QUEST 3</div>
+                <div class="hud-line"><span class="hud-tag">[TBOX]:</span> 142 CLASSES HIERÁRQUICAS MAPEADAS NO LABIRINTO</div>
+                <div class="hud-line"><span class="hud-tag">[ABOX]:</span> 580 INSTÂNCIAS RENDERIZADAS COMO PELLETS</div>
+                <div class="hud-line"><span class="hud-tag">[AGENTE]:</span> REASONER PATRULHANDO DISJOINT_CLASSES...</div>
+                <div class="hud-line success"><span class="hud-tag">[CONSISTÊNCIA]:</span> ONTOLOGIA TOTALMENTE COERENTE (0 CONFLITOS)</div>
+              </div>
+              <button id="btnSimulateOntology" class="retro-pixel-btn primary full-width">
+                ⚡ SIMULAR CARREGAMENTO DE ONTOLOGIA
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 4. CHECKPOINTS DE CARREIRA (RPG TIMELINE)  -->
+    <!-- ========================================== -->
+    <section id="checkpoints-section" class="section-container">
+      <div class="section-title-tag">
+        <span class="tag-hash">🚩</span> CARREIRA // CHECKPOINTS_DE_NÍVEL
+      </div>
+
+      <div class="checkpoints-timeline">
+        
+        <!-- Checkpoint 1 -->
+        <div class="checkpoint-card">
+          <div class="checkpoint-badge">LEVEL 01</div>
+          <div class="checkpoint-content retro-window">
+            <div class="window-titlebar">
+              <span class="title-text">UFRPE // BIOLOGIA_SYS.LOG</span>
+              <span class="date-badge">2018 - 2022</span>
+            </div>
+            <div class="checkpoint-body">
+              <h3 class="checkpoint-title">Fundação Científica & Pensamento Sistêmico</h3>
+              <p class="checkpoint-org">Universidade Federal Rural de Pernambuco (UFRPE)</p>
+              <p class="checkpoint-desc">
+                Imersão em sistemática biológica, cladística, genética e rigor do método científico. Foi aqui que compreendi como a mente humana categoriza a realidade em taxonomias intrincadas — semente que viria a germinar no estudo formal de ontologias computacionais.
+              </p>
+              <div class="checkpoint-loot">
+                <span class="loot-label">Loot obtido:</span> Pensamento taxonômico, método científico, análise de padrões complexos.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkpoint 2 -->
+        <div class="checkpoint-card">
+          <div class="checkpoint-badge">LEVEL 02</div>
+          <div class="checkpoint-content retro-window">
+            <div class="window-titlebar mint-bar">
+              <span class="title-text">TECH_TRANSITION // CODING.BIN</span>
+              <span class="date-badge">2022 - 2023</span>
+            </div>
+            <div class="checkpoint-body">
+              <h3 class="checkpoint-title">A Virada para o Desenvolvimento de Software</h3>
+              <p class="checkpoint-org">Autodidatismo & Projetos Práticos de Programação</p>
+              <p class="checkpoint-desc">
+                Transição definitiva para tecnologia: domínio de lógica de programação, JavaScript, ecossistema Web moderno, estruturas de dados e criação de interfaces interativas, aliando estética e usabilidade.
+              </p>
+              <div class="checkpoint-loot">
+                <span class="loot-label">Loot obtido:</span> Front-end reativo, algoritmos, design de interfaces e APIs.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkpoint 3 -->
+        <div class="checkpoint-card">
+          <div class="checkpoint-badge">LEVEL 03</div>
+          <div class="checkpoint-content retro-window">
+            <div class="window-titlebar cream-bar">
+              <span class="title-text">FACULDADE_SENAC // SISTEMAS_INFO.EXE</span>
+              <span class="date-badge">2023 - PRESENTE</span>
+            </div>
+            <div class="checkpoint-body">
+              <h3 class="checkpoint-title">Engenharia de Software & Sistemas de Informação</h3>
+              <p class="checkpoint-org">Faculdade SENAC Pernambuco</p>
+              <p class="checkpoint-desc">
+                Consolidação prática em engenharia de requisitos, bancos de dados relacionais e orientados a documentos, redes, microsserviços e governança de tecnologia da informação aplicada ao mercado real.
+              </p>
+              <div class="checkpoint-loot">
+                <span class="loot-label">Loot obtido:</span> Arquitetura de software, modelagem corporativa, agilidade e padrões de projeto.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkpoint 4 (Current Boss / Master Stage) -->
+        <div class="checkpoint-card current-level">
+          <div class="checkpoint-badge current-badge">LEVEL 04 (BOSS LEVEL)</div>
+          <div class="checkpoint-content retro-window">
+            <div class="window-titlebar flagship-bar">
+              <span class="title-text">CIn-UFPE // MESTRADO_PESQUISA.OWL</span>
+              <span class="date-badge highlight-date">2024 - PRESENTE</span>
+            </div>
+            <div class="checkpoint-body">
+              <h3 class="checkpoint-title">Mestrado em Ciência da Computação</h3>
+              <p class="checkpoint-org">Centro de Informática da Universidade Federal de Pernambuco (CIn - UFPE)</p>
+              <p class="checkpoint-desc">
+                Pesquisa avançada em Web Semântica, Realidade Virtual (Meta Quest 3), Lógica Descritiva e Agentes Inteligentes. Desenvolvimento do 'Pac-Man Semântico' como dissertação e ferramenta inovadora para a comunidade científica internacional.
+              </p>
+              <div class="checkpoint-loot">
+                <span class="loot-label">Loot obtido:</span> OWL 2 DL, Unity 6 XR, Computação Espacial, Lógica Formal e Publicações Acadêmicas.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 5. DIÁRIO DE BORDO & BLOG (VIBE TUMBLR)    -->
+    <!-- ========================================== -->
+    <section id="blog-section" class="section-container">
+      <div class="section-title-tag">
+        <span class="tag-hash">✎</span> DIÁRIO_DE_BORDO // TUMBLR_LOGS
+      </div>
+
+      <div class="blog-grid">
+        
+        <!-- Post 1 -->
+        <article class="tumblr-post-card retro-window">
+          <div class="window-titlebar">
+            <div class="post-meta-header">
+              <span class="post-author-icon">👾</span>
+              <span class="post-author-name">lana-research-notes</span>
+            </div>
+            <span class="post-date">10 DE NOVEMBRO</span>
+          </div>
+          <div class="post-body">
+            <h3 class="post-title">Por que transformar ontologias do Protégé em um jogo em Realidade Virtual?</h3>
+            <p>
+              Quem já abriu uma ontologia com 500 classes no Protégé sabe: a experiência é visualmente austera e cansativa. Se passamos horas navegando em mundos 3D de jogos sem cansaço mental, por que não aproveitar nossa <em>cognição espacial</em> inata para inspecionar hierarquias conceituais?
+            </p>
+            <p>
+              No Meta Quest 3, uma restrição de classe não é um texto corrido: é uma porta que só se abre se o axioma for satisfeito. Os fantasmas são agentes de raciocínio. A ciência se torna tangível e intuitiva!
+            </p>
+            <div class="post-tags">
+              <a href="#blog-section">#websemantica</a>
+              <a href="#blog-section">#metaquest3</a>
+              <a href="#blog-section">#unity6</a>
+              <a href="#blog-section">#mestrado-cin</a>
+            </div>
+          </div>
+          <div class="post-footer">
+            <div class="post-stats">
+              <span class="stat-notes">★ 142 notas</span>
+            </div>
+            <div class="post-actions">
+              <button class="tumblr-btn like-btn" data-liked="false">
+                <span class="heart-icon">🤍</span> <span class="like-count">87</span>
+              </button>
+              <button class="tumblr-btn reblog-btn" title="Reblogar no feed">
+                <span>🔁</span> Reblogar
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="tumblr-post-card retro-window">
+          <div class="window-titlebar mint-bar">
+            <div class="post-meta-header">
+              <span class="post-author-icon">🧬</span>
+              <span class="post-author-name">lana-bio-meets-code</span>
+            </div>
+            <span class="post-date">03 DE NOVEMBRO</span>
+          </div>
+          <div class="post-body">
+            <h3 class="post-title">Da Biologia à Computação: como a taxonomia me ensinou a projetar sistemas</h3>
+            <p>
+              Quando estudei sistemática na UFRPE, aprendi que classificar seres vivos não é só dar nomes em latim: é entender herança, derivação de caracteres e restrições evolutivas.
+            </p>
+            <p>
+              Quando comecei a estudar Programação Orientada a Objetos e Ontologias OWL, tudo fez sentido instantaneamente: polimorfismo, herança múltipla e relações parte-todo já estavam gravadas na minha cabeça através da botânica e da zoologia. A interdisciplinaridade é o maior superpoder de quem desenvolve tecnologia!
+            </p>
+            <div class="post-tags">
+              <a href="#blog-section">#biologia</a>
+              <a href="#blog-section">#carreiratech</a>
+              <a href="#blog-section">#ufrpe</a>
+              <a href="#blog-section">#sistemas-de-informacao</a>
+            </div>
+          </div>
+          <div class="post-footer">
+            <div class="post-stats">
+              <span class="stat-notes">★ 98 notas</span>
+            </div>
+            <div class="post-actions">
+              <button class="tumblr-btn like-btn" data-liked="false">
+                <span class="heart-icon">🤍</span> <span class="like-count">64</span>
+              </button>
+              <button class="tumblr-btn reblog-btn" title="Reblogar no feed">
+                <span>🔁</span> Reblogar
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="tumblr-post-card retro-window">
+          <div class="window-titlebar cream-bar">
+            <div class="post-meta-header">
+              <span class="post-author-icon">⚡</span>
+              <span class="post-author-name">lana-xr-dev-diaries</span>
+            </div>
+            <span class="post-date">24 DE OUTUBRO</span>
+          </div>
+          <div class="post-body">
+            <h3 class="post-title">WebSockets de alta performance no Unity 6: conectando ontologias sem engasgos</h3>
+            <p>
+              Um dos desafios do meu projeto foi garantir que as mudanças feitas na ontologia fossem refletidas no headset de Realidade Virtual com latência imperceptível. 
+            </p>
+            <p>
+              Utilizando WebSockets assíncronos e um despachante de eventos em C# desacoplado do <code>Update()</code> principal da Unity, conseguimos manter 90 FPS estáveis no Meta Quest 3, renderizando novos axiomas dinamicamente conforme o jogador caminha pelos corredores conceituais.
+            </p>
+            <div class="post-tags">
+              <a href="#blog-section">#gamedev</a>
+              <a href="#blog-section">#websockets</a>
+              <a href="#blog-section">#csharp</a>
+              <a href="#blog-section">#performance</a>
+            </div>
+          </div>
+          <div class="post-footer">
+            <div class="post-stats">
+              <span class="stat-notes">★ 215 notas</span>
+            </div>
+            <div class="post-actions">
+              <button class="tumblr-btn like-btn" data-liked="false">
+                <span class="heart-icon">🤍</span> <span class="like-count">132</span>
+              </button>
+              <button class="tumblr-btn reblog-btn" title="Reblogar no feed">
+                <span>🔁</span> Reblogar
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 6. SEÇÃO DE CONTATO / TUMBLR ASK BOX       -->
+    <!-- ========================================== -->
+    <section id="contact-section" class="section-container">
+      <div class="section-title-tag">
+        <span class="tag-hash">✉</span> INSERT_COIN // CONECTE-SE
+      </div>
+
+      <div class="contact-grid">
+        <!-- Coluna da Esquerda: Arcade Coin Box & Links Sociais -->
+        <div class="retro-window coin-slot-card">
+          <div class="window-titlebar mint-bar">
+            <span class="title-text">ARCADE_SLOT // 2_PLAYERS</span>
+            <span class="coin-blink">INSERT COIN</span>
+          </div>
+          <div class="coin-slot-content">
+            <div class="coin-art-box">
+              <div class="coin-hole"></div>
+              <span class="coin-label">1 CREDIT = 1 CONNECTION</span>
+            </div>
+            <h3 class="contact-card-title">VAMOS CONVERSAR?</h3>
+            <p class="contact-card-desc">
+              Tem interesse em pesquisas em Ontologias, Realidade Virtual, desenvolvimento web nostálgico ou quer bater um papo sobre a transição de Biologia para Computação? Minha caixa de entrada está sempre aberta!
+            </p>
+
+            <div class="social-pills-stack">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-pill">
+                <span class="social-icon">🐙</span>
+                <span class="social-text">github.com/lana</span>
+                <span class="social-arrow">↗</span>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-pill">
+                <span class="social-icon">💼</span>
+                <span class="social-text">linkedin.com/in/lana</span>
+                <span class="social-arrow">↗</span>
+              </a>
+              <a href="http://lattes.cnpq.br" target="_blank" rel="noopener noreferrer" class="social-pill">
+                <span class="social-icon">📜</span>
+                <span class="social-text">Currículo Lattes (CNPq)</span>
+                <span class="social-arrow">↗</span>
+              </a>
+              <a href="mailto:lana@cin.ufpe.br" class="social-pill highlight-pill">
+                <span class="social-icon">✉️</span>
+                <span class="social-text">lana@cin.ufpe.br</span>
+                <span class="social-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna da Direita: Tumblr Ask Box Interativa -->
+        <div class="retro-window askbox-card">
+          <div class="window-titlebar cream-bar">
+            <span class="title-text">TUMBLR_ASK_BOX // DEIXE_UMA_MENSAGEM</span>
+            <span class="win-btn win-close">✕</span>
+          </div>
+          <div class="askbox-inner">
+            <div class="askbox-speech-lead">
+              <span class="lead-avatar">👾</span>
+              <p>Pergunte-me qualquer coisa sobre o <strong>Pac-Man Semântico</strong>, <strong>CIn-UFPE</strong>, <strong>SENAC</strong> ou deixe uma reflexão no meu diário de bordo!</p>
+            </div>
+
+            <form id="contactForm" class="retro-form">
+              <div class="form-group">
+                <label for="senderName" class="form-label">SEU NOME / ROSTER CALLSIGN:</label>
+                <input type="text" id="senderName" class="retro-input" placeholder="Ex: Player_1 ou Viajante_Web" required>
+              </div>
+
+              <div class="form-group">
+                <label for="senderEmail" class="form-label">SEU E-MAIL:</label>
+                <input type="email" id="senderEmail" class="retro-input" placeholder="seu-email@dominio.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="senderMsg" class="form-label">MENSAGEM OU PERGUNTA:</label>
+                <textarea id="senderMsg" class="retro-textarea" rows="4" placeholder="Escreva sua pergunta anônima ou proposta de colaboração..." required></textarea>
+              </div>
+
+              <div class="form-footer-actions">
+                <button type="submit" class="retro-pixel-btn primary pulse">
+                  🚀 ENVIAR MENSAGEM
+                </button>
+                <span class="form-note">🔒 Sem spam &bull; Resposta em até 24h</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL DE TERMINAL CLI INTERATIVO           -->
+  <!-- ========================================== -->
+  <div id="terminalModal" class="retro-modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="retro-window terminal-window">
+      <div class="window-titlebar mint-bar">
+        <span class="title-text">LANA_RETRO_CLI // BASH_V3.2 [SENAC &bull; CIn-UFPE]</span>
+        <button id="btnCloseTerminal" class="win-btn win-close">✕</button>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-logs" id="terminalLogs">
+          <p class="term-line">&gt; Bem-vindo(a) ao terminal interativo de Lana!</p>
+          <p class="term-line text-cyan">&gt; Digite <span class="cmd-highlight">'help'</span> para listar os comandos disponíveis.</p>
+        </div>
+        <form id="terminalInputForm" class="terminal-prompt-bar">
+          <span class="prompt-prefix">lana@cin-ufpe:~$</span>
+          <input type="text" id="terminalInput" class="term-input" autocomplete="off" spellcheck="false" placeholder="digite um comando...">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL DE SIMULAÇÃO DE ONTOLOGIA VR         -->
+  <!-- ========================================== -->
+  <div id="ontologyModal" class="retro-modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="retro-window modal-window">
+      <div class="window-titlebar flagship-bar">
+        <span class="title-text">SIMULADOR_PROTÉGÉ_WS // LIVE_VR_FEED</span>
+        <button id="btnCloseModal" class="win-btn win-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-status-marquee">
+          <span>● WEBSOCKET: CONECTADO [ws://localhost:8080/owl-stream]</span>
+        </div>
+        
+        <div class="modal-console" id="modalConsoleOutput">
+          <p class="console-line text-cyan">&gt; Iniciando handshake com Protégé 5.6...</p>
+          <p class="console-line text-green">&gt; Ontologia carregada: &lt;http://cin.ufpe.br/pacman-ontology.owl&gt;</p>
+          <p class="console-line">&gt; TBox: Computando taxonomia com raciocinador HermiT...</p>
+          <p class="console-line text-yellow">&gt; Gerando labirinto procedural 3D no Unity 6...</p>
+        </div>
+
+        <div class="modal-interactive-controls">
+          <button id="btnTriggerInconsistency" class="retro-pixel-btn warning">
+            🚨 Simular Conflito Semântico (Spawn Ghost)
+          </button>
+          <button id="btnResolveOntology" class="retro-pixel-btn primary">
+            ✨ Restaurar Consistência Axiomática
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificação Toast Retrô -->
+  <div id="retroToast" class="retro-toast hidden">
+    <span class="toast-icon">💾</span>
+    <span id="toastMsg" class="toast-text">Mensagem do sistema</span>
+  </div>
+
+  <!-- Rodapé Estilo Arcade Neo-Brutalist -->
+  <footer class="page-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="footer-logo">🕹️ LANA // PORTFÓLIO RETRO ARCADE</div>
+        <p class="footer-copy">
+          Desenvolvido com HTML, CSS puro & JS com amor por estética pixel art, Web Semântica e Realidade Virtual.
+        </p>
+      </div>
+      <div class="footer-badges">
+        <span class="footer-chip">UFRPE</span>
+        <span class="footer-chip">FACULDADE SENAC</span>
+        <span class="footer-chip">CIn-UFPE</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="game.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
