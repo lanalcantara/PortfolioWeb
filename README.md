@@ -74,7 +74,7 @@ Depois acesse `http://localhost:8080`.
 - Botões de **curtir** e **reblogar** com notificações retrô.
 
 ### 7. Contato, terminal e extras
-- **Insert Coin:** links para GitHub, Currículo Lattes e e-mail do CIn.
+- **Insert Coin:** links para GitHub, LinkedIn, Currículo Lattes e e-mail do CIn.
 - **Ask Box:** formulário de mensagem no estilo Tumblr (no momento ele só mostra uma confirmação na tela; ainda não envia e-mails).
 - **Terminal CLI** (botão `⌨️ CLI`): comandos `help`, `about`, `ufrpe`, `senac`, `cin`, `pacman`, `skills`, `contact` e `clear`.
 - **Filtro CRT** (scanlines) com liga/desliga.
@@ -119,6 +119,7 @@ PortfolioWeb/
 - 🧬 Ciências Biológicas — **UFRPE** (finalizado em 2023), com PIBIC e TCC na **Fiocruz-PE**
 - ✉️ lsasa@cin.ufpe.br
 - 🐙 [github.com/lanalcantara](https://github.com/lanalcantara)
+- 💼 [linkedin.com/in/lanasofia](https://www.linkedin.com/in/lanasofia/)
 - 📜 [Currículo Lattes](https://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K8052185D8)
 
 ---

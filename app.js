@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
           resp.textContent = `Tech Stack: Unity 6 XR, Meta Quest 3, Protégé / OWL 2, WebSockets, JavaScript/TypeScript, Python, HTML/CSS Retrô.`;
           break;
         case 'contact':
-          resp.textContent = `E-mail: lsasa@cin.ufpe.br | GitHub: github.com/lanalcantara | Lattes: buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K8052185D8`;
+          resp.textContent = `E-mail: lsasa@cin.ufpe.br | GitHub: github.com/lanalcantara | LinkedIn: linkedin.com/in/lanasofia | Lattes: buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K8052185D8`;
           break;
         case 'clear':
           terminalLogs.innerHTML = `<p class="term-line text-cyan">&gt; Terminal limpo. Digite 'help' para comandos.</p>`;
