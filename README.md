@@ -1,96 +1,126 @@
-# 🕹️ Portfólio Retro Arcade & Web Semântica
+# 🕹️ LANA.EXE — Portfólio Retro Arcade & Web Semântica
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 [![Unity 6](https://img.shields.io/badge/Unity_6-000000?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/)
 [![Meta Quest 3](https://img.shields.io/badge/Meta_Quest_3-0467DF?style=for-the-badge&logo=meta&logoColor=white)](https://www.meta.com/quest/quest-3/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-online-ff3c89?style=for-the-badge&logo=github&logoColor=white)](https://lanalcantara.github.io/PortfolioWeb/)
 
-Portfólio pessoal interativo, responsivo e funcional desenvolvido com **HTML5, CSS3 puro (com animações neo-brutalist / pixel art) e JavaScript Vanilla**. O design une a estética nostálgica do **Tumblr** e dos clássicos fliperamas de **arcade em tons de roxo escuro, rosa neon, verde menta e bege retrô**.
+Portfólio pessoal interativo e responsivo feito com **HTML5, CSS3 puro e JavaScript Vanilla**, sem frameworks nem dependências. A estética mistura a nostalgia do **Tumblr** com **arcade em pixel art**: roxo escuro, rosa neon, verde menta e bege retrô.
+
+🌐 **Site no ar:** https://lanalcantara.github.io/PortfolioWeb/
 
 ---
 
-## 🚀 Como Executar Localmente
+## 🚀 Como executar localmente
 
-### Opção 1: Direto no Navegador (Mais Rápido)
-Basta abrir o arquivo [`index.html`](index.html) diretamente no seu navegador favorito (Chrome, Edge, Firefox, etc.).
+**Opção 1 — direto no navegador:** abra o arquivo [`index.html`](index.html) no Chrome, Edge ou Firefox.
 
-### Opção 2: Via Servidor Local
-Se tiver Python ou Node.js instalado no terminal:
+**Opção 2 — servidor local:**
 
 ```bash
-# Com Python 3:
+# Python 3
 python -m http.server 8080
 
-# Ou com Node.js (npx):
+# ou Node.js
 npx serve .
 ```
-Em seguida, acesse no navegador: `http://localhost:8080`
+
+Depois acesse `http://localhost:8080`.
 
 ---
 
-## 🎮 Funcionalidades Principais
+## 🎮 Funcionalidades
 
-### 1. Header com Minijogo 'Pac-Runner' (Estilo Chrome Dino)
-- **Gameplay Fluido:** O Pac-Man corre automaticamente para a direita pelo cenário arcade.
-- **Controles Universais:** Pressione **[Barra de Espaço]**, **[Seta para Cima]** ou dê um **[Clique / Toque na Tela]** para saltar sobre os fantasminhas (*Blinky, Pinky, Inky e Clyde*).
-- **Seletor de Personagens (Choose Your Character):** Escolha entre *Pac-Man Clássico*, *Ms. Pac-Man* (com laço rosa), *Cyborg VR* (com visor ciano) ou *Bio-Cell* (verde menta).
-- **Pontuação:** Colete pastilhas de ontologia flutuantes (+100 pts) e salte fantasmas (+50 pts).
-- **Recorde Automático:** High Score salvo de forma persistente no `localStorage`.
-- **Efeitos Sonoros 8-Bit:** Áudio sintetizado em tempo real via **Web Audio API** (sem arquivos externos pesados), com controle de mute na barra de navegação.
+### 1. Minijogo "Pac-Runner" (cabeçalho)
+- Endless runner no estilo do dinossauro do Chrome: o Pac-Man corre sozinho e você salta os fantasmas (*Blinky, Pinky, Inky e Clyde*).
+- **Controles:** `Espaço`, `↑` ou clique/toque na tela.
+- **Pontuação:** +50 por fantasma saltado e +100 por pastilha coletada. A velocidade aumenta com o tempo.
+- **Recorde** salvo no `localStorage` e tela de **Game Over** em pixel art com botão de reiniciar.
+- **Escolha de personagem:** Clássico, Ms. Pac (laço rosa), Cyborg VR (visor ciano) e Bio-Cell (verde menta).
+- **Sons 8-bit** gerados em tempo real pela Web Audio API, com botão para silenciar.
 
-### 2. Seção "About Me" (Vibe Tumblr / Retro OS)
-- **Narrativa em Caixas de Diálogo RPG:**
-  - **Nível 1 (A Origem - Ciências Biológicas):** Formação na UFRPE, experimentos em anatomia e primatas, com PIBIC e TCC em parasitologia na **Fiocruz-PE**.
-  - **Nível 2 (A Grande Virada - Computação & SENAC):** Transição de carreira para a área de tecnologia no **SENAC-PE**, ingressando no mestrado em Ciência da Computação no **CIn-UFPE** com foco em Inteligência Computacional e Web Semântica.
-  - **Nível 3 (O Boss Final - O Pac-Man Semântico):** A superação do bloqueio com ontologias estáticas no Protégé ao cursar Realidade Virtual e Aumentada, dando vida ao Pac-Man Semântico.
-  - **Checkpoint Final:** Call-to-action para explorar o labirinto ciberfísico na aba de Projetos.
-- **Player Stats:** Medidores retrô de **HP (Café & Foco)** e **Mana (Pesquisa CIn)**, avatar em pixel art e player de música lofi animado.
+### 2. Sobre mim (caixas de diálogo estilo RPG)
+- **Player card** com avatar em pixel art (cabelo curto cacheado castanho claro, olhos verdes, pele marrom bege), badge **MESTRANDA**, barras de HP/Mana, player de música e tags estilo Tumblr.
+- Trajetória contada em níveis:
+  - **Nível 1 — A Origem:** Ciências Biológicas na UFRPE, com PIBIC e TCC em parasitologia na **Fiocruz-PE**.
+  - **Nível 2 — A Grande Virada:** mudança para a computação no **SENAC-PE** e entrada no mestrado do **CIn-UFPE** (Inteligência Computacional e Web Semântica).
+  - **Nível 3 — O Boss Final:** a cadeira de Realidade Virtual e Aumentada e o nascimento do **Pac-Man Semântico**.
+  - **Checkpoint Final:** atalho para a aba de Projetos.
 
-### 3. Aba de Projetos (Destaque: 'Pac-Man Semântico')
-- **A Dor Real:** Superação da sobrecarga cognitiva e da navegação estática 2D de axiomas no Protégé.
-- **A Solução em VR (Meta Quest 3 & Unity 6):**
-  - **TBox:** Labirintos procedurais 3D estruturados a partir da taxonomia de classes (`subClassOf`, `is-a`) com sinalização viária conceitual.
-  - **ABox:** Instâncias representadas como pastilhas coletáveis com asserções de dados (`DataProperty`).
-  - **Agentes de Raciocínio (Fantasmas):** Raciocinadores semânticos (*HermiT/Pellet*) que patrulham o labirinto e sinalizam conflitos lógicos (ex: `DisjointClasses`).
-- **Arquitetura Full-Duplex:** Protégé/OWL API ➔ WebSocket Server ➔ Unity 6 XR Standalone.
-- **Simulador Interativo de Telemetria:** Modal com console de eventos onde é possível injetar conflitos semânticos e verificar a consistência em tempo real.
+### 3. Projeto em destaque: Pac-Man Semântico
+- Ferramenta em **Unity 6** para **Meta Quest 3**, integrada ao **Protégé/OWL** via **WebSocket**.
+- **Problema:** ontologias no Protégé são estáticas, abstratas e cansativas de navegar.
+- **Proposta:** a **TBox** vira um labirinto com placas de sinalização taxonômica, a **ABox** vira itens coletáveis e os **agentes de raciocínio** (fantasmas) validam as restrições.
+- Diagrama de arquitetura (Protégé/OWL API ➔ WebSocket ➔ Unity 6 XR) e **simulador de telemetria** interativo em modal.
 
-### 4. Checkpoints de Carreira (RPG Timeline)
-- **Level 01:** UFRPE & Fiocruz-PE &bull; Ciências Biológicas e Pesquisa de Bancada
-- **Level 02:** Transição Tech &bull; Desenvolvimento Web e Lógica de Programação
-- **Level 03:** Faculdade SENAC &bull; Sistemas de Informação e Engenharia de Software
-- **Level 04 (Boss Stage):** CIn-UFPE &bull; Mestrado em Ciência da Computação, Web Semântica e Realidade Virtual
+### 4. Galeria de fotos (polaroids)
+- Cards em formato polaroid com **filtros** (Todos, VR & Projetos, Pesquisa & Bancada, Tech & CIn-UFPE).
+- Clique para ampliar em um **lightbox** (fecha com `Esc`).
+- Os cards usam imagens provisórias; veja abaixo como colocar fotos reais.
 
-### 5. Diário de Bordo & Notas (Tumblr Vibe)
-- Ensaios rápidos conectando biologia, taxonomia, computação espacial e WebSockets de alto desempenho.
-- Botões interativos de **Curtir** (com contagem dinâmica e coração neon) e **Reblogar** (com notificações toast retrô).
+### 5. Checkpoints de carreira
 
-### 6. Terminal CLI Retrô & Ask Box de Contato
-- **Terminal CLI Embutido:** Acesse clicando no botão `⌨️ CLI` na barra superior e digite comandos como `help`, `about`, `ufrpe`, `senac`, `cin`, `pacman`, `skills` e `clear`.
-- **Tumblr Ask Box:** Formulário de envio de mensagens com validação e links diretos para LinkedIn, GitHub, Currículo Lattes e E-mail.
-- **Easter Egg Konami Code:** Tente digitar a famosa sequência no teclado (`↑ ↑ ↓ ↓ ← → ← → B A`)!
+| Nível | Etapa | Período |
+|---|---|---|
+| LEVEL 01 | Ciências Biológicas — UFRPE | Finalizado em 2023 |
+| LEVEL 02 | Transição para o desenvolvimento de software | 2024 – 2026 |
+| LEVEL 03 | Sistemas de Informação — Faculdade SENAC-PE | 2024 – 2026 |
+| LEVEL 04 (Boss) | Mestrado em Ciência da Computação — CIn-UFPE | 2026.1 – presente |
+
+### 6. Diário de bordo (Tumblr)
+- Posts curtos sobre ontologias em VR, a ponte entre biologia e computação e WebSockets no Unity 6.
+- Botões de **curtir** e **reblogar** com notificações retrô.
+
+### 7. Contato, terminal e extras
+- **Insert Coin:** links para GitHub, Currículo Lattes e e-mail do CIn.
+- **Ask Box:** formulário de mensagem no estilo Tumblr (no momento ele só mostra uma confirmação na tela; ainda não envia e-mails).
+- **Terminal CLI** (botão `⌨️ CLI`): comandos `help`, `about`, `ufrpe`, `senac`, `cin`, `pacman`, `skills`, `contact` e `clear`.
+- **Filtro CRT** (scanlines) com liga/desliga.
+- **Easter egg:** Konami Code (`↑ ↑ ↓ ↓ ← → ← → B A`).
+- Meta tags de SEO/Open Graph e favicon em pixel art.
 
 ---
 
-## 📁 Estrutura dos Arquivos
+## 🖼️ Como adicionar suas fotos na galeria
+
+1. Crie uma pasta `images/` na raiz do projeto e coloque suas fotos nela.
+2. No `index.html`, dentro do card desejado da seção `#gallery-section`, troque o bloco `<div class="retro-img-placeholder ...">...</div>` por:
+
+```html
+<img src="images/minha-foto.jpg" alt="Descrição da foto" style="width:100%;height:100%;object-fit:cover;">
+```
+
+3. Ajuste os atributos `data-title`, `data-desc` e `data-tag` do card para mudar o texto que aparece no lightbox.
+
+---
+
+## 📁 Estrutura dos arquivos
 
 ```text
-portifólio web/
-│
-├── index.html        # Estrutura semântica completa e componentes de interface
-├── styles.css        # Sistema de design, paleta retro neon, tipografia e responsividade
-├── game.js           # Engine do minijogo Pac-Runner, física, skins e sintetizador de áudio
-├── app.js            # Interatividades, Terminal CLI, Modal VR, Curtidas e Toasts
-└── README.md         # Documentação completa do projeto
+PortfolioWeb/
+├── .github/workflows/deploy.yml  # Workflow de deploy no GitHub Pages
+├── index.html                    # Estrutura e conteúdo de todas as seções
+├── styles.css                    # Paleta retrô neon, pixel art, animações e responsividade
+├── game.js                       # Engine do Pac-Runner, skins e sons 8-bit
+├── app.js                        # Terminal CLI, modais, galeria, curtidas e toasts
+├── LICENSE                       # Licença MIT
+└── README.md                     # Esta documentação
 ```
 
 ---
 
 ## 👩‍💻 Autora
 
-**Lana Alcântara**  
-- Mestranda em Ciência da Computação &bull; **CIn - UFPE**  
-- Graduanda em Sistemas de Informação &bull; **Faculdade SENAC-PE**  
-- Bacharel e Licenciada em Ciências Biológicas &bull; **UFRPE** (PIBIC/TCC na **Fiocruz-PE**)  
-- GitHub: [@lanalcantara](https://github.com/lanalcantara)
+**Lana Alcântara**
+- 🎓 Mestranda em Ciência da Computação — **CIn-UFPE** (desde 2026.1)
+- 💻 Sistemas de Informação — **Faculdade SENAC-PE** (2024 – 2026)
+- 🧬 Ciências Biológicas — **UFRPE** (finalizado em 2023), com PIBIC e TCC na **Fiocruz-PE**
+- ✉️ lsasa@cin.ufpe.br
+- 🐙 [github.com/lanalcantara](https://github.com/lanalcantara)
+- 📜 [Currículo Lattes](https://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K8052185D8)
+
+---
+
+Distribuído sob a licença MIT. Veja [`LICENSE`](LICENSE).
